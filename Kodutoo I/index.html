@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Elukohateade</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="main.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="main.js"></script>
+    </head>
+    
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <h1>ELUKOHATEADE</h1>
+                    
+                    <div class="row">
+                        <h2>1. ESITAJA</h2>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Eesnimi" id="submitter-firstname" >
+                            <input class="form-control" placeholder="Perenimi" id="submitter-lastname">
+                            <input type="number" class="form-control" placeholder="Isikukood">
+                            <input type="email" class="form-control" placeholder="E-post">
+                            <input type="tel" class="form-control" placeholder="Telefon">
+                            
+                            <input class="form-control" placeholder="Välisriigi isikukood (olemasolul)">
+                            <input class="form-control" placeholder="Eelmine elukoht välismaal (täita saabumisel välismaal)">
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <h2>2. UUE ELUKOHA AADRESS</h2>
+                        <div class="form-group">
+                            <select id="riik" class="select" onchange="selectCountry()">
+                                <option disabled selected>Riik</option>
+                                <option>Eesti</option>
+                            </select>
+                            <select style="display: none" name="Maakond" class="select" id="maakondEesti">
+                                <option disabled selected>Maakond</option>
+                                <option>Harjumaa</option>
+                                <option>Hiiumaa</option>
+                                <option>Ida-Virumaa</option>
+                                <option>Jõgevamaa</option>
+                                <option>Järvamaa</option>
+                                <option>Läänemaa</option>
+                                <option>Lääne-Virumaa</option>
+                                <option>Põlvamaa</option>
+                                <option>Pärnumaa</option>
+                                <option>Raplamaa</option>
+                                <option>Saaremaa</option>
+                                <option>Tartumaa</option>
+                                <option>Valgamaa</option>
+                                <option>Viljandimaa</option>
+                                <option>Võrumaa</option>
+                            </select>
+                
+                            <input class="form-control" placeholder="Maakond" id="maakond">
+                            <input class="form-control" placeholder="Vald/linn, alevik, küla">
+                            <input class="form-control" placeholder="Tänav/talu, maja nr, korteri nr">
+                            <input class="form-control" placeholder="Postiindeks">
+                            <label><input onchange="changeOtherPeoplesResidence()" type="checkbox" id="otherPeoplesResidence" value="">Soovin muuta ka teiste isikute elukohta</label>
+                            <label><input type="checkbox" id="multipleResidences" onchange="multipleResidences()" value="">Elan ka mujal</label>
+                        </div>
+                    </div>
+                    
+                    <div class="row" id="block-three" style="display: none">
+                        <h2>3. TEISED ISIKUD, KELLE ELUKOHA AADRESSI MUUDETAKSE</h2>
+                        <div class="form-group" id="other-people">
+                            <input class="form-control" placeholder="Eesnimi">
+                            <input class="form-control" placeholder="Perenimi">
+                            <input class="form-control" placeholder="Isikukood">
+                            <input type="email" class="form-control" placeholder="E-post">
+                            <input type="tel" class="form-control" placeholder="Telefon">
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <h2>4. RUUMI KASUTAMISE ÕIGUS</h2>
+                        <div class="form-group" id="rights-wrapper">
+                            <label>
+                                Olen ruumi (kaas)omanik
+                                <input type="checkbox" value="">
+                                <span class="glyphicon glyphicon-question-sign" style="cursor:pointer" title="Ruumi kasutusõigust tõendava dokumendi olemasolul (nt üürileping) ei pea elukohateatele täiendavalt lisama ruumi omaniku nõusolekut"></span>
+                            </label>
+                            <label>
+                                Lisan üürilepingu
+                                <input type="checkbox" value="">
+                                <span class="glyphicon glyphicon-question-sign" style="cursor:pointer" title="Kui isik ei ole ise kaasomanik, on kaasomandis oleva ruumi andmete esitamisel vajalik kõigi kaasomanike või nende esindajate nõusolek. Kaasomanike vahel sõlmitud ruumi kasutamise kokkuleppe korral võib nõusolekute asemel lisada vastavat kokkulepet tõendava dokumendi"></span>
+                            </label>
+                            <label>
+                                Ruumi kasutamise muu alus
+                                <input type="checkbox" value="">
+                                <span class="glyphicon glyphicon-question-sign" style="cursor:pointer" title="Ruumi kasutamise muuks aluses võib olla näiteks isiklik kasutusõigus või ruumi kasutamine perekonnaliikmena"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="row" id="block-five" style="display: none">
+                        <h2>5. ELAN KA MUJAL</h2>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Riik"> <!-- SELECT -->
+                            <input class="form-control" placeholder="Maakond"> <!-- SELECT -->
+                            <input class="form-control" placeholder="Vald/linn, alevik, küla">
+                            <input class="form-control" placeholder="Tänav/talu, maja nr, korteri nr">
+                            <input class="form-control" placeholder="Postiindeks">
+                            <label style="margin:5px 0;">Kehtib alates<input type="date" class="form-control" placeholder="Kehtib alates"></label>
+                            <label style="margin:5px 0;">Kehtib kuni<input type="date" class="form-control" placeholder="Kehtib kuni"></label>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <h2>6. LISAD</h2>
+                        <div class="form-group">
+                            <input type="file" class="form-control" placeholder="Lisa">
+                            <input class="form-control" placeholder="Lisa kirjeldus">
+                        </div>
+                    </div>
+                    
+                    <button type="button" class="btn btn-success">SAADA</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
