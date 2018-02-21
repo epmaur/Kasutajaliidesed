@@ -5,39 +5,36 @@
         <title>Elukohateade</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="main.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="main.js"></script>
     </head>
     
     <body>
         <div class="container">
-            <div class="row">
+            <div class="row" ng-app="myApp" ng-controller="myCtrl">
                 <div class="col-lg-6 col-lg-offset-3">
                     <h1>ELUKOHATEADE</h1>
                     
                     <div class="row">
-                        <h2>1. ESITAJA</h2>
+                        <h2><span class="index-nr"></span> ESITAJA</h2>
                         <div class="form-group">
-                            <input class="form-control" placeholder="Eesnimi" id="submitter-firstname" >
+                            <input type="text" class="form-control" placeholder="Eesnimi" id="submitter-firstname" >
                             <input class="form-control" placeholder="Perenimi" id="submitter-lastname">
                             <input type="number" class="form-control" placeholder="Isikukood">
                             <input type="email" class="form-control" placeholder="E-post">
                             <input type="tel" class="form-control" placeholder="Telefon">
                             
                             <input class="form-control" placeholder="Välisriigi isikukood (olemasolul)">
-                            <input class="form-control" placeholder="Eelmine elukoht välismaal (täita saabumisel välismaal)">
+                            <input class="form-control" placeholder="Eelmine elukoht välismaal (täita saabumisel välismaalt)">
                         </div>
                     </div>
                     
                     <div class="row">
-                        <h2>2. UUE ELUKOHA AADRESS</h2>
+                        <h2><span class="index-nr"></span> UUE ELUKOHA AADRESS</h2>
                         <div class="form-group">
-                            <select id="riik" class="select" onchange="selectCountry()">
+                            <select id="riik" class="form-control select" onchange="selectCountry()">
                                 <option disabled selected>Riik</option>
                                 <option>Eesti</option>
                             </select>
-                            <select style="display: none" name="Maakond" class="select" id="maakondEesti">
+                            <select style="display: none" name="Maakond" class="form-control select" id="maakondEesti">
                                 <option disabled selected>Maakond</option>
                                 <option>Harjumaa</option>
                                 <option>Hiiumaa</option>
@@ -66,39 +63,47 @@
                     </div>
                     
                     <div class="row" id="block-three" style="display: none">
-                        <h2>3. TEISED ISIKUD, KELLE ELUKOHA AADRESSI MUUDETAKSE</h2>
-                        <div class="form-group" id="other-people">
-                            <input class="form-control" placeholder="Eesnimi">
-                            <input class="form-control" placeholder="Perenimi">
-                            <input class="form-control" placeholder="Isikukood">
-                            <input type="email" class="form-control" placeholder="E-post">
-                            <input type="tel" class="form-control" placeholder="Telefon">
+                        <h2><span class="index-nr"></span> TEISED ISIKUD, KELLE ELUKOHA AADRESSI MUUDETAKSE</h2>
+                        <div id="people"></div>
+                        <div id="people-wrapper">
+                            <div class="form-group" id="other-people">
+                                <input class="form-control" placeholder="Eesnimi">
+                                <input class="form-control" placeholder="Perenimi">
+                                <input class="form-control" placeholder="Isikukood">
+                                <input type="email" class="form-control" placeholder="E-post">
+                                <input type="tel" class="form-control" placeholder="Telefon">
+                            </div>
                         </div>
+                        <button class="btn btn-success" id="savePerson"><span class="glyphicon glyphicon-plus"></span></button>
                     </div>
                     
-                    <div class="row">
-                        <h2>4. RUUMI KASUTAMISE ÕIGUS</h2>
+                    <div class="row" id="block-four" style="display: none">
+                        <h2><span class="index-nr"></span> RUUMI KASUTAMISE ÕIGUS</h2>
                         <div class="form-group" id="rights-wrapper">
                             <label>
-                                Olen ruumi (kaas)omanik
-                                <input type="checkbox" value="">
-                                <span class="glyphicon glyphicon-question-sign" style="cursor:pointer" title="Ruumi kasutusõigust tõendava dokumendi olemasolul (nt üürileping) ei pea elukohateatele täiendavalt lisama ruumi omaniku nõusolekut"></span>
+                                <input type="radio" name="rights" value="1">
+                                Olen omanik
                             </label>
                             <label>
-                                Lisan üürilepingu
-                                <input type="checkbox" value="">
-                                <span class="glyphicon glyphicon-question-sign" style="cursor:pointer" title="Kui isik ei ole ise kaasomanik, on kaasomandis oleva ruumi andmete esitamisel vajalik kõigi kaasomanike või nende esindajate nõusolek. Kaasomanike vahel sõlmitud ruumi kasutamise kokkuleppe korral võib nõusolekute asemel lisada vastavat kokkulepet tõendava dokumendi"></span>
+                                <input type="radio" name="rights" value="2">
+                                Olen kaasomanik
+                                <!--<span class="glyphicon glyphicon-question-sign" style="cursor:pointer" title="Ruumi kasutusõigust tõendava dokumendi olemasolul (nt üürileping) ei pea elukohateatele täiendavalt lisama ruumi omaniku nõusolekut"></span>-->
                             </label>
                             <label>
-                                Ruumi kasutamise muu alus
-                                <input type="checkbox" value="">
-                                <span class="glyphicon glyphicon-question-sign" style="cursor:pointer" title="Ruumi kasutamise muuks aluses võib olla näiteks isiklik kasutusõigus või ruumi kasutamine perekonnaliikmena"></span>
+                                <input type="radio" name="rights" value="3">
+                                Olen üürnik
+                                <!--<span class="glyphicon glyphicon-question-sign" style="cursor:pointer" title="Kui isik ei ole ise kaasomanik, on kaasomandis oleva ruumi andmete esitamisel vajalik kõigi kaasomanike või nende esindajate nõusolek. Kaasomanike vahel sõlmitud ruumi kasutamise kokkuleppe korral võib nõusolekute asemel lisada vastavat kokkulepet tõendava dokumendi"></span>-->
+                            </label>
+                            <label>
+                                <input type="radio" name="rights" value="4">
+                                Muu alus
+                                <!--<span class="glyphicon glyphicon-question-sign" style="cursor:pointer" title="Ruumi kasutamise muuks aluses võib olla näiteks isiklik kasutusõigus või ruumi kasutamine perekonnaliikmena"></span>-->
                             </label>
                         </div>
                     </div>
                     
                     <div class="row" id="block-five" style="display: none">
-                        <h2>5. ELAN KA MUJAL</h2>
+                        <h2><span class="index-nr"></span> ELAN KA MUJAL</h2>
                         <div class="form-group">
                             <input class="form-control" placeholder="Riik"> <!-- SELECT -->
                             <input class="form-control" placeholder="Maakond"> <!-- SELECT -->
@@ -111,10 +116,11 @@
                     </div>
                     
                     <div class="row">
-                        <h2>6. LISAD</h2>
+                        <h2><span class="index-nr"></span> LISAD</h2>
                         <div class="form-group">
+                            <div id="extras-header"></div>
                             <input type="file" class="form-control" placeholder="Lisa">
-                            <input class="form-control" placeholder="Lisa kirjeldus">
+                            <input class="form-control" placeholder="Kommentaar">
                         </div>
                     </div>
                     
@@ -122,5 +128,9 @@
                 </div>
             </div>
         </div>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="main.js"></script>
     </body>
 </html>

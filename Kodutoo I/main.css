@@ -14,8 +14,37 @@ label {
     display: block;
     height:34px;
     width: 100%;
-    padding:  6px 12px;
+    padding: 6px 12px;
     margin-top: 5px;
 
 }
 
+body {
+    padding: 30px 0;
+}
+
+.person-info-wrapper {
+    color: #5cb85c;
+    padding: 8px 16px;
+    font-size: 19px;
+    cursor: pointer;
+}
+.person-info-wrapper .glyphicon {
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+#savePerson {
+    padding: 4px 8px;
+}
+
+#block-three .form-group {
+    background: #ccc;
+    padding: 10px 5px;
+    border-radius: 4px;
+}
+
+.opened {
+    background: #ccc;
+    
+}
