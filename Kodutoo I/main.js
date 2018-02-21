@@ -22,7 +22,7 @@ $(document).ready(function() {
         const block = $('#block-three #people-wrapper .form-group:last-child');
 //        console.log(block);
         $(block).hide();
-        $('<div class="person-info-wrapper" onclick="startShowInfo(this)"><span></span><div class="person-info"><span class="inner">' + $('#block-three .form-group:last-child input').first().val() + ' ' + $('#block-three .form-group:last-child input:nth-child(2)').val() + '<span class="glyphicon glyphicon-pencil"></span></span></div></div>').insertBefore('#people-wrapper .form-group:last-child')
+        $('<div class="person-info-wrapper" onclick="startShowInfo(this)"><span></span><div class="person-info"><span class="inner">' + $('#block-three .form-group:last-child input').first().val() + ' ' + $('#block-three .form-group:last-child input:nth-child(2)').val() + '<span class="glyphicon glyphicon-pencil"></span><span class="glyphicon glyphicon-remove"></span></div></div>').insertBefore('#people-wrapper .form-group:last-child')
         /*$('#people').append(
             '<div class="person-info-wrapper"><div class="person-info">' + $('#block-three .form-group:last-child input').first().val() + '</div>' + '<div class="person-info">' + $('#block-three .form-group:last-child input:nth-child(2)').val() + '</div></div>'
         );*/
