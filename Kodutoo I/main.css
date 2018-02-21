@@ -29,9 +29,15 @@ body {
     font-size: 19px;
     cursor: pointer;
 }
+
+
 .person-info-wrapper .glyphicon {
     margin-left: 10px;
     font-size: 14px;
+}
+.person-info-wrapper .glyphicon:hover {
+    cursor: pointer;
+    color: gainsboro;
 }
 
 #savePerson {
@@ -47,4 +53,24 @@ body {
 .opened {
     background: #ccc;
     
+}
+
+.checkbox-label {
+    margin-top: 3px !important;
+}
+
+.checkbox {
+    margin-right: 5px !important;
+    display: inline;
+}
+
+.extras-header {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.inner {
+    background-color: #ccc;
+    padding: 12px 5px;
+    border-radius: 3px;
 }

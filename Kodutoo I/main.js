@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    getListOfCounties();
+    getListOfCountries();
     displayNumbers();
     
     $('input[name="rights"]').on('change', function() {
@@ -20,12 +22,34 @@ $(document).ready(function() {
         const block = $('#block-three #people-wrapper .form-group:last-child');
 //        console.log(block);
         $(block).hide();
-        $('<div class="person-info-wrapper" onclick="startShowInfo(this)"><div class="person-info"><span class="inner">' + $('#block-three .form-group:last-child input').first().val() + ' ' + $('#block-three .form-group:last-child input:nth-child(2)').val() + '<span class="glyphicon glyphicon-pencil"></span></span></div></div>').insertBefore('#people-wrapper .form-group:last-child')
+        $('<div class="person-info-wrapper" onclick="startShowInfo(this)"><span></span><div class="person-info"><span class="inner">' + $('#block-three .form-group:last-child input').first().val() + ' ' + $('#block-three .form-group:last-child input:nth-child(2)').val() + '<span class="glyphicon glyphicon-pencil"></span></span></div></div>').insertBefore('#people-wrapper .form-group:last-child')
         /*$('#people').append(
             '<div class="person-info-wrapper"><div class="person-info">' + $('#block-three .form-group:last-child input').first().val() + '</div>' + '<div class="person-info">' + $('#block-three .form-group:last-child input:nth-child(2)').val() + '</div></div>'
         );*/
         addAnotherPerson();
     });
+    
+    
+    $('.form-control').on('focus', function(event){
+        $( event.target ).empty();
+        var inputfieldWidth = $(event.target).width();
+        var _$tmpSpan = $('<span/>').html($(event.target).attr('placeholder')).css({
+              position: 'absolute',
+              left: -9999,
+              top: -9999
+          }).appendTo('body'),
+              textWidth = _$tmpSpan.width();
+          _$tmpSpan.remove();
+        var textIndentValue = 100 - (textWidth /inputfieldWidth * 100);
+        $("<style>")
+          .prop("type", "text/css")
+          .html("\
+          .form-control:focus::placeholder {\
+              text-indent:"+ textIndentValue+"%;\
+          }")
+          .appendTo(event.target);
+    });
+        
 });
 
 //$('.person-info-wrapper').on('click', function() {
@@ -46,12 +70,12 @@ function startShowInfo(el) {
 
 function showInfo(blocks, index) {
     if ($(blocks[index]).is(':visible')) {
-        $(blocks[index]).hide();
+        $(blocks[index]).hide("slow");
     } else {
         Array.prototype.forEach.call(blocks, function(block) {
             $(block).hide();
         });
-        $(blocks[index]).show();
+        $(blocks[index]).show("slow");
     }
 }
 
@@ -71,8 +95,8 @@ function displayNumbers() {
 
 function selectCountry() {
     var country = document.getElementById("riik");
-    var selected = country.options[country.selectedIndex].value;
-    if (selected === 'Eesti') {
+    var selected = country.value;
+    if (selected === 'Estonia') {
         document.getElementById("maakond").style = "display:none";
         document.getElementById("maakondEesti").style = "display:block";
     }
@@ -91,9 +115,64 @@ function changeOtherPeoplesResidence() {
 function multipleResidences() {
     var checkboxValue = document.getElementById("multipleResidences").checked;
     if (checkboxValue) {
-        document.getElementById("block-five").style = "display:block";
+        document.getElementById("block-four").style = "display:block";
     } else {
-        document.getElementById("block-five").style = "display:none";
+        document.getElementById("block-four").style = "display:none";
     }
     displayNumbers();
+}
+
+function getListOfCounties() {
+    var allCounties = ['Harjumaa', 'Hiiumaa', 'Ida-Virumaa', 'Jõgevamaa', 'Järvamaa','Läänemaa', 'Lääne-Virumaa', 'Põlvamaa', 'Pärnumaa', 'Raplamaa',
+    'Saaremaa', 'Tartumaa', 'Valgamaa', 'Viljandimaa', 'Võrumaa'];
+    var options = {
+        source: allCounties,
+        minLength:0
+    }
+    $('#maakond').autocomplete(options).bind('focus', function() {
+        $(this).autocomplete("search");
+    });
+    $('#maakond2').autocomplete(options).bind('focus', function() {
+        $(this).autocomplete("search");
+    }); 
+}
+function getListOfCountries() {
+    var allCountries= [];
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "https://restcountries.eu/rest/v2/all", false);
+    xhr.send();
+    var countryData = JSON.parse(xhr.responseText);
+    for (i = 0; i < countryData.length; i++) { 
+        allCountries.push(countryData[i].name);
+    }
+    var options = {
+        source: allCountries,
+        minLength:0,
+        select: function(event, ui) {
+            if (ui.item.label === 'Estonia') {
+                $('#maakond').autocomplete("enable" );
+            } else {
+                $('#maakond').val('');
+                $('#maakond').autocomplete("disable" );
+            }
+        }
+    }
+    var options2 = {
+        source: allCountries,
+        minLength:0,
+        select: function(event, ui) {
+            if (ui.item.label === 'Estonia') {
+                $('#maakond2').autocomplete("enable" );
+            } else {
+                $('#maakond2').val('');
+                $('#maakond2').autocomplete("disable" );
+            }
+        }
+    }
+    $("#riik2").autocomplete(options2).bind('focus', function() {
+        $(this).autocomplete("search");
+    }); 
+    $("#riik").autocomplete(options).bind('focus', function() {
+        $(this).autocomplete("search");
+    });  
 }

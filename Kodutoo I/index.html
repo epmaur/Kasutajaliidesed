@@ -5,6 +5,7 @@
         <title>Elukohateade</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css">
     </head>
     
     <body>
@@ -16,12 +17,11 @@
                     <div class="row">
                         <h2><span class="index-nr"></span> ESITAJA</h2>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Eesnimi" id="submitter-firstname" >
-                            <input class="form-control" placeholder="Perenimi" id="submitter-lastname">
+                            <input type="text" class="form-control" id="submitter-firstname" placeholder="Eesnimi">
+                            <input type="text" class="form-control" id="submitter-lastname" placeholder="Perenimi">     
                             <input type="number" class="form-control" placeholder="Isikukood">
                             <input type="email" class="form-control" placeholder="E-post">
                             <input type="tel" class="form-control" placeholder="Telefon">
-                            
                             <input class="form-control" placeholder="Välisriigi isikukood (olemasolul)">
                             <input class="form-control" placeholder="Eelmine elukoht välismaal (täita saabumisel välismaalt)">
                         </div>
@@ -30,35 +30,13 @@
                     <div class="row">
                         <h2><span class="index-nr"></span> UUE ELUKOHA AADRESS</h2>
                         <div class="form-group">
-                            <select id="riik" class="form-control select" onchange="selectCountry()">
-                                <option disabled selected>Riik</option>
-                                <option>Eesti</option>
-                            </select>
-                            <select style="display: none" name="Maakond" class="form-control select" id="maakondEesti">
-                                <option disabled selected>Maakond</option>
-                                <option>Harjumaa</option>
-                                <option>Hiiumaa</option>
-                                <option>Ida-Virumaa</option>
-                                <option>Jõgevamaa</option>
-                                <option>Järvamaa</option>
-                                <option>Läänemaa</option>
-                                <option>Lääne-Virumaa</option>
-                                <option>Põlvamaa</option>
-                                <option>Pärnumaa</option>
-                                <option>Raplamaa</option>
-                                <option>Saaremaa</option>
-                                <option>Tartumaa</option>
-                                <option>Valgamaa</option>
-                                <option>Viljandimaa</option>
-                                <option>Võrumaa</option>
-                            </select>
-                
-                            <input class="form-control" placeholder="Maakond" id="maakond">
+                            <input type="text" id="riik" placeholder="Riik" class="form-control">
+                            <input type="text" id="maakond" placeholder="Maakond" class="form-control">
                             <input class="form-control" placeholder="Vald/linn, alevik, küla">
                             <input class="form-control" placeholder="Tänav/talu, maja nr, korteri nr">
                             <input class="form-control" placeholder="Postiindeks">
-                            <label><input onchange="changeOtherPeoplesResidence()" type="checkbox" id="otherPeoplesResidence" value="">Soovin muuta ka teiste isikute elukohta</label>
-                            <label><input type="checkbox" id="multipleResidences" onchange="multipleResidences()" value="">Elan ka mujal</label>
+                            <label class="checkbox-label"><input onchange="changeOtherPeoplesResidence()" type="checkbox" id="otherPeoplesResidence" value="" class="checkbox">Soovin muuta ka teiste isikute elukohta</label>
+                            <label class="checkbox-label"><input type="checkbox" id="multipleResidences" onchange="multipleResidences()" class="checkbox">Elan ka mujal</label>
                         </div>
                     </div>
                     
@@ -77,7 +55,21 @@
                         <button class="btn btn-success" id="savePerson"><span class="glyphicon glyphicon-plus"></span></button>
                     </div>
                     
+                    
                     <div class="row" id="block-four" style="display: none">
+                        <h2><span class="index-nr"></span> ELAN KA MUJAL</h2>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Riik" id="riik2">
+                            <input type="text" class="form-control" placeholder="Maakond" id="maakond2">
+                            <input type="text" class="form-control" placeholder="Vald/linn, alevik, küla">
+                            <input type="text" class="form-control" placeholder="Tänav/talu, maja nr, korteri nr">
+                            <input type="number" class="form-control" placeholder="Postiindeks">
+                            <label style="margin:5px 0;">Kehtib alates<input type="date" class="form-control" placeholder="Kehtib alates"></label>
+                            <label style="margin:5px 0;">Kehtib kuni<input type="date" class="form-control" placeholder="Kehtib kuni"></label>
+                        </div>
+                    </div>
+                  
+                    <div class="row" id="block-five">
                         <h2><span class="index-nr"></span> RUUMI KASUTAMISE ÕIGUS</h2>
                         <div class="form-group" id="rights-wrapper">
                             <label>
@@ -87,38 +79,22 @@
                             <label>
                                 <input type="radio" name="rights" value="2">
                                 Olen kaasomanik
-                                <!--<span class="glyphicon glyphicon-question-sign" style="cursor:pointer" title="Ruumi kasutusõigust tõendava dokumendi olemasolul (nt üürileping) ei pea elukohateatele täiendavalt lisama ruumi omaniku nõusolekut"></span>-->
                             </label>
                             <label>
                                 <input type="radio" name="rights" value="3">
                                 Olen üürnik
-                                <!--<span class="glyphicon glyphicon-question-sign" style="cursor:pointer" title="Kui isik ei ole ise kaasomanik, on kaasomandis oleva ruumi andmete esitamisel vajalik kõigi kaasomanike või nende esindajate nõusolek. Kaasomanike vahel sõlmitud ruumi kasutamise kokkuleppe korral võib nõusolekute asemel lisada vastavat kokkulepet tõendava dokumendi"></span>-->
                             </label>
                             <label>
                                 <input type="radio" name="rights" value="4">
                                 Muu alus
-                                <!--<span class="glyphicon glyphicon-question-sign" style="cursor:pointer" title="Ruumi kasutamise muuks aluses võib olla näiteks isiklik kasutusõigus või ruumi kasutamine perekonnaliikmena"></span>-->
                             </label>
-                        </div>
-                    </div>
-                    
-                    <div class="row" id="block-five" style="display: none">
-                        <h2><span class="index-nr"></span> ELAN KA MUJAL</h2>
-                        <div class="form-group">
-                            <input class="form-control" placeholder="Riik"> <!-- SELECT -->
-                            <input class="form-control" placeholder="Maakond"> <!-- SELECT -->
-                            <input class="form-control" placeholder="Vald/linn, alevik, küla">
-                            <input class="form-control" placeholder="Tänav/talu, maja nr, korteri nr">
-                            <input class="form-control" placeholder="Postiindeks">
-                            <label style="margin:5px 0;">Kehtib alates<input type="date" class="form-control" placeholder="Kehtib alates"></label>
-                            <label style="margin:5px 0;">Kehtib kuni<input type="date" class="form-control" placeholder="Kehtib kuni"></label>
                         </div>
                     </div>
                     
                     <div class="row">
                         <h2><span class="index-nr"></span> LISAD</h2>
                         <div class="form-group">
-                            <div id="extras-header"></div>
+                            <div id="extras-header" class="extras-header"></div>
                             <input type="file" class="form-control" placeholder="Lisa">
                             <input class="form-control" placeholder="Kommentaar">
                         </div>
@@ -130,6 +106,8 @@
         </div>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="main.js"></script>
     </body>
