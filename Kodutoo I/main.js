@@ -29,26 +29,6 @@ $(document).ready(function() {
         addAnotherPerson();
     });
     
-    
-    $('.form-control').on('focus', function(event){
-        $( event.target ).empty();
-        var inputfieldWidth = $(event.target).width();
-        var _$tmpSpan = $('<span/>').html($(event.target).attr('placeholder')).css({
-              position: 'absolute',
-              left: -9999,
-              top: -9999
-          }).appendTo('body'),
-              textWidth = _$tmpSpan.width();
-          _$tmpSpan.remove();
-        var textIndentValue = 100 - (textWidth /inputfieldWidth * 100);
-        $("<style>")
-          .prop("type", "text/css")
-          .html("\
-          .form-control:focus::placeholder {\
-              text-indent:"+ textIndentValue+"%;\
-          }")
-          .appendTo(event.target);
-    });
         
 });
 
@@ -81,7 +61,8 @@ function showInfo(blocks, index) {
 
 function addAnotherPerson() {
     $('#block-three #people-wrapper').append(
-        '<div class="form-group" id="other-people"><input class="form-control" placeholder="Eesnimi"><input class="form-control" placeholder="Perenimi"><input class="form-control" placeholder="Isikukood"><input type="email" class="form-control" placeholder="E-post"><input type="tel" class="form-control" placeholder="Telefon"></div>');
+        '<div class="form-group" id="other-people"><div class="inputdiv"><input class="form-control"><span class="floating-label">Eesnimi</span></div><div class="inputdiv"><input class="form-control"><span class="floating-label">Perenimi</span></div><div class="inputdiv"><input class="form-control"><span class="floating-label">Isikukood</span></div><div class="inputdiv"><input type="email" class="form-control"><span class="floating-label">E-post</span></div><div class="inputdiv"><input type="tel" class="form-control"><span class="floating-label">Telefon</span></div></div>');
+      
 }
 
 function displayNumbers() {

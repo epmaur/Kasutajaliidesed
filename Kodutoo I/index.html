@@ -17,24 +17,60 @@
                     <div class="row">
                         <h2><span class="index-nr"></span> ESITAJA</h2>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="submitter-firstname" placeholder="Eesnimi">
-                            <input type="text" class="form-control" id="submitter-lastname" placeholder="Perenimi">     
-                            <input type="number" class="form-control" placeholder="Isikukood">
-                            <input type="email" class="form-control" placeholder="E-post">
-                            <input type="tel" class="form-control" placeholder="Telefon">
-                            <input class="form-control" placeholder="Välisriigi isikukood (olemasolul)">
-                            <input class="form-control" placeholder="Eelmine elukoht välismaal (täita saabumisel välismaalt)">
+                          <div class="inputdiv">
+                            <input type="text" class="form-control" id="submitter-firstname" required>
+                            <span class="floating-label">Eesnimi</span>
+                          </div>
+                          <div class="inputdiv">
+                            <input type="text" class="form-control" id="submitter-firstname" required>
+                            <span class="floating-label">Perenimi</span>
+                          </div>
+                          <div class="inputdiv">
+                            <input type="number" class="form-control" required>
+                            <span class="floating-label">Isikukood</span>
+                          </div>
+                          <div class="inputdiv">
+                            <input type="email" class="form-control" required>
+                            <span class="floating-label">E-post</span>
+                          </div>
+                          <div class="inputdiv">
+                            <input type="tel" class="form-control" required>
+                            <span class="floating-label">Telefon</span>
+                          </div>
+                          <div class="inputdiv">
+                            <input type="number" class="form-control" required>
+                            <span class="floating-label">Välisriigi isikukood (olemasolul) </span>
+                          </div>
+                          <div class="inputdiv">
+                            <input type="text" class="form-control" required>
+                            <span class="floating-label">Eelmine elukoht välismaal (täita saabumisel välismaalt)</span>
+                          </div>
                         </div>
                     </div>
                     
                     <div class="row">
                         <h2><span class="index-nr"></span> UUE ELUKOHA AADRESS</h2>
                         <div class="form-group">
-                            <input type="text" id="riik" placeholder="Riik" class="form-control">
-                            <input type="text" id="maakond" placeholder="Maakond" class="form-control">
-                            <input class="form-control" placeholder="Vald/linn, alevik, küla">
-                            <input class="form-control" placeholder="Tänav/talu, maja nr, korteri nr">
-                            <input class="form-control" placeholder="Postiindeks">
+                          <div class="inputdiv">
+                            <input type="text" id="riik" class="form-control" required>
+                            <span class="floating-label">Riik</span>
+                          </div>
+                          <div class="inputdiv">
+                            <input type="text" id="maakond" class="form-control" required>
+                            <span class="floating-label">Maakond</span>
+                          </div>
+                          <div class="inputdiv">
+                            <input type="text" class="form-control" required>
+                            <span class="floating-label">Vald/linn, alevik, küla</span>
+                          </div>
+                          <div class="inputdiv">
+                            <input type="text" class="form-control" required>
+                            <span class="floating-label">Tänav/talu, maja nr, korteri nr</span>
+                          </div>
+                          <div class="inputdiv">
+                            <input type="number" class="form-control" required>
+                            <span class="floating-label">Postiindeks</span>
+                          </div>
                             <label class="checkbox-label"><input onchange="changeOtherPeoplesResidence()" type="checkbox" id="otherPeoplesResidence" value="" class="checkbox">Soovin muuta ka teiste isikute elukohta</label>
                             <label class="checkbox-label"><input type="checkbox" id="multipleResidences" onchange="multipleResidences()" class="checkbox">Elan ka mujal</label>
                         </div>
@@ -45,11 +81,26 @@
                         <div id="people"></div>
                         <div id="people-wrapper">
                             <div class="form-group" id="other-people">
-                                <input class="form-control" placeholder="Eesnimi">
-                                <input class="form-control" placeholder="Perenimi">
-                                <input class="form-control" placeholder="Isikukood">
-                                <input type="email" class="form-control" placeholder="E-post">
-                                <input type="tel" class="form-control" placeholder="Telefon">
+                              <div class="inputdiv">
+                                <input type="text" class="form-control" required>
+                                <span class="floating-label">Eesnimi</span>
+                              </div>
+                              <div class="inputdiv">
+                                <input type="text" class="form-control" required>
+                                <span class="floating-label">Perenimi</span>
+                              </div>
+                              <div class="inputdiv">
+                                <input type="number" class="form-control" required>
+                                <span class="floating-label">Isikukood</span>
+                              </div>
+                              <div class="inputdiv">
+                                <input type="email" class="form-control" required>
+                                <span class="floating-label">E-post</span>
+                              </div>
+                              <div class="inputdiv">
+                                <input type="tel" class="form-control" required>
+                                <span class="floating-label">Telefon</span>
+                              </div>
                             </div>
                         </div>
                         <button class="btn btn-success" id="savePerson"><span class="glyphicon glyphicon-plus"></span></button>
@@ -59,11 +110,26 @@
                     <div class="row" id="block-four" style="display: none">
                         <h2><span class="index-nr"></span> ELAN KA MUJAL</h2>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Riik" id="riik2">
-                            <input type="text" class="form-control" placeholder="Maakond" id="maakond2">
-                            <input type="text" class="form-control" placeholder="Vald/linn, alevik, küla">
-                            <input type="text" class="form-control" placeholder="Tänav/talu, maja nr, korteri nr">
-                            <input type="number" class="form-control" placeholder="Postiindeks">
+                          <div class="inputdiv">
+                            <input type="text" class="form-control" id="riik2" required>
+                            <span class="floating-label">Riik</span>
+                          </div>
+                          <div class="inputdiv">
+                            <input type="text" class="form-control" id="maakond2" required>
+                            <span class="floating-label">Maakond</span>
+                          </div>
+                          <div class="inputdiv">
+                            <input type="text" class="form-control" required>
+                            <span class="floating-label">Vald/linn, alevik, küla</span>
+                          </div>
+                          <div class="inputdiv">
+                            <input type="text" class="form-control" required>
+                            <span class="floating-label">Tänav/talu, maja nr, korteri nr</span>
+                          </div>
+                          <div class="inputdiv">
+                            <input type="number" class="form-control" required>
+                            <span class="floating-label">Postiindeks</span>
+                          </div>
                             <label style="margin:5px 0;">Kehtib alates<input type="date" class="form-control" placeholder="Kehtib alates"></label>
                             <label style="margin:5px 0;">Kehtib kuni<input type="date" class="form-control" placeholder="Kehtib kuni"></label>
                         </div>
@@ -96,7 +162,11 @@
                         <div class="form-group">
                             <div id="extras-header" class="extras-header"></div>
                             <input type="file" class="form-control" placeholder="Lisa">
-                            <input class="form-control" placeholder="Kommentaar">
+                            <div class="inputdiv">
+                              <input type="text" class="form-control" required>
+                              <span class="floating-label">Kommentaar</span>
+                            </div>
+                            
                         </div>
                     </div>
                     
