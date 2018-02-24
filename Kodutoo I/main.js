@@ -19,43 +19,98 @@ $(document).ready(function() {
     });
     
     $('#savePerson').on('click', function() {
-        const block = $('#block-three #people-wrapper .form-group:last-child');
-//        console.log(block);
-        $(block).hide();
-        $('<div class="person-info-wrapper" onclick="startShowInfo(this)"><span></span><div class="person-info"><span class="inner">' + $('#block-three .form-group:last-child input').first().val() + ' ' + $('#block-three .form-group:last-child input:nth-child(2)').val() + '<span class="glyphicon glyphicon-pencil"></span><span class="glyphicon glyphicon-remove"></span></div></div>').insertBefore('#people-wrapper .form-group:last-child')
-        /*$('#people').append(
-            '<div class="person-info-wrapper"><div class="person-info">' + $('#block-three .form-group:last-child input').first().val() + '</div>' + '<div class="person-info">' + $('#block-three .form-group:last-child input:nth-child(2)').val() + '</div></div>'
-        );*/
-        addAnotherPerson();
+        if (isFilled($(this).parent().find('#people-wrapper'))) {
+            const block = $('#block-three #people-wrapper .form-group:last-child');
+            $(block).hide();
+            $('<div class="person-info-wrapper"><div class="person-info"><span class="inner" onclick="startShowInfo(this)"><span class="saved-name">' + $('#block-three .form-group:last-child .inputdiv:first-child input').val() + ' ' + $('#block-three .form-group:last-child .inputdiv:nth-child(2) input').val() + '<span class="glyphicon glyphicon-pencil"></span></span></span><span class="glyphicon glyphicon-remove"></span></div></div>').insertBefore('#people-wrapper .form-group:last-child')
+            addAnotherPerson();
+        }
+    });
+    $('body').click(function(event) {
+        if (event.target.classList.contains('glyphicon-remove')) {
+            const index = $(event.target).parent().parent().index();
+            $('#people-wrapper div').eq(index).remove();
+            $('#people-wrapper div').eq(index).remove();
+        }
     });
     
-        
+    $('#file-input-displayed').click(function() {
+        $('#file-input').click();
+    });
+
+    $('#choose-file').click(function() {
+        $('#file-input').click();
+    });
+    
+    $('#file-input').change(function(e) {
+        if (e) {
+            $('#file-input-displayed').val( $(this)[0].files[0].name );
+        }
+    });
+    
+    $('#send1').click(function() {
+        $('#page1').fadeOut(500);
+        setTimeout(function() {
+            $('.animationload').show();
+        }, 400);
+        setTimeout(function() {
+            $('.animationload').hide();
+            $('#page2').fadeIn(500);
+        }, 1000);
+    });
+    $('#send2').click(function() {
+        $('#page2').fadeOut(500);
+        setTimeout(function() {
+            $('.animationload').show();
+        }, 400);
+        setTimeout(function() {
+            $('.animationload').hide();
+            $('#page3').fadeIn(500);
+        }, 1000);
+    });
+    $('#send3').click(function() {
+        $('#page3').fadeOut(500);
+        setTimeout(function() {
+            $('.animationload').show();
+        }, 400);
+        setTimeout(function() {
+            $('.animationload').hide();
+            $('#page1').fadeIn(500);
+        }, 1000);
+    });
 });
 
-//$('.person-info-wrapper').on('click', function() {
-//            let index = $(this).index();
-//            if (index > 0) {
-//                index = index - 1;
-//            }
-//            showInfo($('#block-three .form-group:not(:last-child)'), index);
-//        });
+function isFilled(parent) {
+    let ok = true;
+    Array.prototype.forEach.call($(parent).children().children(), function(child) {
+        if ($(child).children('input')) {
+            if ($(child).children('input').val() === '') {
+                fail(child);
+                ok = false;
+            }
+        }
+    });
+    return ok;
+}
 
 function startShowInfo(el) {
-    let index = $(el).index();
+    let index = $(el).parent().parent().index();
     if (index > 0) {
         index = index - 1;
     }
-    showInfo($('#block-three .form-group:not(:last-child)'), index);
+    showInfo($('#block-three .form-group:not(:last-child)'), index, $(el).parent().parent());
 }
 
-function showInfo(blocks, index) {
+function showInfo(blocks, index, el) {
     if ($(blocks[index]).is(':visible')) {
         $(blocks[index]).hide("slow");
+        $(el).children().children().first().removeClass('opened');
     } else {
         Array.prototype.forEach.call(blocks, function(block) {
             $(block).hide();
         });
         $(blocks[index]).show("slow");
+        $(el).children().children().first().addClass('opened');
     }
 }
 
