@@ -49,14 +49,18 @@ $(document).ready(function() {
     });
     
     $('#send1').click(function() {
-        $('#page1').fadeOut(500);
-        setTimeout(function() {
-            $('.animationload').show();
-        }, 400);
-        setTimeout(function() {
-            $('.animationload').hide();
-            $('#page2').fadeIn(500);
-        }, 1000);
+        if (pageFilled()) {
+            $('#page1').fadeOut(500);
+            setTimeout(function() {
+                $('.animationload').show();
+            }, 400);
+            setTimeout(function() {
+                $('.animationload').hide();
+                $('#page2').fadeIn(500);
+            }, 1000);
+        } else {
+            // display modal
+        }
     });
     $('#send2').click(function() {
         $('#page2').fadeOut(500);
@@ -79,6 +83,16 @@ $(document).ready(function() {
         }, 1000);
     });
 });
+
+function pageFilled() {
+    let ok = true;
+    Array.prototype.forEach.call(document.getElementsByClassName('required'), function(input) {
+        if ($(input).val() === '') {
+            ok = false;
+        }
+    });
+    return ok;
+}
 
 function isFilled(parent) {
     let ok = true;
