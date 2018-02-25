@@ -99,7 +99,7 @@ body {
 
 .inputdiv {
   position: relative !important;
-  margin:5px;
+  margin:5px 0;
 }
 
 .floating-label {
@@ -190,5 +190,55 @@ body {
     .col-xs-12 {
         padding: 0 30px;
     }
+}
+
+.saved-message {
+    font-size: 27px;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.optional-message {
+    margin: 10px 0;
+}
+
+.row {
+		margin: auto;		
+}
+
+.glyphicon-warning-sign {
+	color: red !important;
+}
+
+.has-warning .form-control{
+	border-color: red;
+}
+
+.error-message {
+	  color: red;
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#block-seven .form-group{
+  background: #ccc;
+  padding: 10px 5px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+#send2 {
+  margin-top:10px;
+}
+
+.name-span {
+  background: #ccc;
+  padding: 12px 0 12px 5px;
+  border-radius: 4px 4px 0 0;
+  font-weight: 500;
+  font-size: 15px;
 }
 

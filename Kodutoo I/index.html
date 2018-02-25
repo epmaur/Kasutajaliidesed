@@ -18,7 +18,7 @@
                 <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
                     <h1>ELUKOHATEADE</h1>
                     
-                    <div class="row">
+                    <div class="row" id="block-one">
                         <h2><span class="index-nr"></span> ESITAJA</h2>
                         <div class="form-group">
                           <div class="inputdiv">
@@ -26,7 +26,7 @@
                             <span class="floating-label">Eesnimi</span>
                           </div>
                           <div class="inputdiv">
-                            <input type="text" class="form-control no-nr required" id="submitter-firstname" required>
+                            <input type="text" class="form-control no-nr required" id="submitter-lastname" required>
                             <span class="floating-label">Perenimi</span>
                           </div>
                           <div class="inputdiv">
@@ -42,12 +42,12 @@
                             <span class="floating-label">Telefon</span>
                           </div>
                           <div class="inputdiv">
-                            <input class="form-control nr-input required" required>
+                            <input class="form-control nr-input required" required id="foreignID">
                             <span class="floating-label">Välisriigi isikukood (olemasolul) </span>
                           </div>
                           <div class="inputdiv">
-                            <input type="text" class="form-control required" required>
-                            <span class="floating-label">Eelmine elukoht välismaal (täita saabumisel välismaalt)</span>
+                            <input type="text" class="form-control required" required id="foreignResidence">
+                            <span class="floating-label">Eelmine elukoht välismaal (olemasolul)</span>
                           </div>
                         </div>
                     </div>
@@ -84,13 +84,13 @@
                         <h2><span class="index-nr"></span> TEISED ISIKUD, KELLE ELUKOHA AADRESSI MUUDETAKSE</h2>
                         <div id="people"></div>
                         <div id="people-wrapper">
-                            <div class="form-group" id="other-people">
+                            <div class="form-group other-people" id="other-people">
                               <div class="inputdiv">
-                                <input type="text" class="form-control no-nr" required>
+                                <input type="text" class="form-control no-nr" required id="firstname">
                                 <span class="floating-label">Eesnimi</span>
                               </div>
                               <div class="inputdiv">
-                                <input type="text" class="form-control no-nr" required>
+                                <input type="text" class="form-control no-nr" required id="lastname">
                                 <span class="floating-label">Perenimi</span>
                               </div>
                               <div class="inputdiv">
@@ -134,8 +134,8 @@
                             <input class="form-control nr-input" required>
                             <span class="floating-label">Postiindeks</span>
                           </div>
-                            <label style="margin:5px 0;">Kehtib alates<input type="date" class="form-control" placeholder="Kehtib alates"></label>
-                            <label style="margin:5px 0;">Kehtib kuni<input type="date" class="form-control" placeholder="Kehtib kuni"></label>
+                            <label style="margin:5px 0;">Kehtib alates<input type="date" required class="form-control" placeholder="Kehtib alates"></label>
+                            <label style="margin:5px 0;">Kehtib kuni<input type="date" required class="form-control" placeholder="Kehtib kuni"></label>
                         </div>
                     </div>
                   
@@ -161,22 +161,22 @@
                         </div>
                     </div>
                     
-                    <div class="row">
+                    <div class="row" id="block-six" style="display: none">
                         <h2><span class="index-nr"></span> LISAD</h2>
                         <div class="form-group">
                             <div id="extras-header" class="extras-header"></div>
                             <div class="inputdiv input-group">
-                                <input type="file" class="form-control" id="file-input" placeholder="Lisa" style="display:none;">
+                                <input type="file" class="form-control" id="file-input"  placeholder="Lisa" style="display:none;">
                                 <label class="input-group-btn">
                                     <span class="btn btn-default" id="choose-file">
                                         CHOOSE FILE 
                                     </span>
                                 </label>
-                                <input class="form-control" id="file-input-displayed" placeholder="Vali fail" readonly="readonly">
+                                <input class="form-control required" id="file-input-displayed" placeholder="Vali fail" readonly="readonly">
                                 
                             </div>
                             <div class="inputdiv">
-                              <input type="text" class="form-control" required>
+                              <input type="text" class="form-control" required id="comment">
                               <span class="floating-label">Kommentaar</span>
                             </div>
                             
@@ -184,6 +184,7 @@
                     </div>
                     
                     <button type="button" class="btn btn-success" id="send1">SAADA</button>
+										<span class="error-message" style="display: none;">Vormis on vigaseid või täitmata jäänud väljasid!</span>
                 </div>
             </div>
         </div>
@@ -191,39 +192,13 @@
         <div class="container" id="page2">
             <div class="row">
                 <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
-                    <h1>ELUKOHATEADE</h1>
-                    
-                    <div class="row">
-                        <div class="form-group">
-                            <div>Mari Mari</div>
-                            <input class="form-control" placeholder="Rahvus">
-                            <input class="form-control" placeholder="Emakeel">
-                            <select class="form-control select">
-                                <option disabled selected>Omandatud kõrgeim haridustase</option>
-                                <option>Alghariduseta</option>
-                                <option>Põhikooli 1.-6.klass</option>
-                                <option>Põhikooli 7.-9.klass</option>
-                                <option>Kutsekeskharidus või kutseõpe (sh keskeri-või tehnikumiharidus) põhihariduse baasil</option>
-                                <option>Keskharidus</option>
-                                <option>Kutsekeskharidus või kutseõpe keskhariduse baasil</option>
-                                <option>Keskeri- ja tehnikumiharidus keskhariduse baasil</option>
-                                <option>Bakalaureus või sellega võrdsustatud haridus</option>
-                                <option>Magister või sellega võrdsustatud haridus</option>
-                                <option>Doktor või sellega võrdsustatud haridus</option>
-                            </select>
-                            <select class="form-control select">
-                                <option disabled selected>Sotsiaal-majanduslik seisund</option>
-                                <option>Töötav</option>
-                                <option>Kodune</option>
-                                <option>Töötu/ tööd otsiv</option>
-                                <option>Ajateenija</option>
-                                <option>Üli(õpilane)</option>
-                                <option>Pensionär</option>
-                                <option>Lapsehoolduspuhkusel</option>
-                                <option>Muu mittetöötav</option>
-                            </select>
-                            
-                        </div>
+                    <div class="saved-message">Aitäh! Teie andmed on salvestatud.</div>
+                    <h4>TÄIENDAVAD ANDMED</h4>
+                    <div class="optional-message">
+											<span class="glyphicon glyphicon-asterisk"></span>
+											Järgnevate andmete edastamine on vabatahtlik
+									</div>
+                    <div class="row" id="block-seven">
                     </div>
                     
                     <button type="button" class="btn btn-success" id="send2">SAADA</button>
