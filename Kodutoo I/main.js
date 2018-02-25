@@ -176,7 +176,7 @@ function showInfo(blocks, index, el) {
 
 function addAnotherPerson() {
     $('#block-three #people-wrapper').append(
-        '<div class="form-group other-people" id="other-people"><div class="inputdiv"><input class="form-control" required id="firstname"><span class="floating-label">Eesnimi</span></div><div class="inputdiv"><input class="form-control" required id="lastname"><span class="floating-label">Perenimi</span></div><div class="inputdiv"><input class="form-control" required><span class="floating-label">Isikukood</span></div><div class="inputdiv"><input type="email" class="form-control" required><span class="floating-label">E-post</span></div><div class="inputdiv"><input type="tel" class="form-control" required><span class="floating-label">Telefon</span></div></div>');
+        '<div class="form-group other-people" id="other-people"><div class="inputdiv"><input class="form-control" required id="firstname"><span class="floating-label">Eesnimi *</span></div><div class="inputdiv"><input class="form-control" required id="lastname"><span class="floating-label">Perenimi *</span></div><div class="inputdiv"><input class="form-control" required><span class="floating-label">Isikukood *</span></div><div class="inputdiv"><input type="email" class="form-control" required><span class="floating-label">E-post *</span></div><div class="inputdiv"><input type="tel" class="form-control" required><span class="floating-label">Telefon *</span></div></div>');
       
 }
 
