@@ -52,8 +52,9 @@ $(document).ready(function() {
             fail(parent);
         }
     });
-    
-    $('input[type="email"]').change(function() {
+	
+
+	$('.email').change(function() {
         const parent = $(this).parent();
         if (validateEmail( $(this).val() )) {
             success(parent);
@@ -61,6 +62,18 @@ $(document).ready(function() {
             fail(parent);
         }
     });
+	
+	var start = document.getElementById('start');
+	var end = document.getElementById('end');
+	start.addEventListener('change', function() {
+		if (start.value)
+			end.min = start.value;
+	}, false);
+	end.addEventListener('change', function() {
+		if (end.value)
+			start.max = end.value;
+	}, false);
+	
 });
 
 function validateEmail($email) {
