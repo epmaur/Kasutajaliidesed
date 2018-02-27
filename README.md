@@ -6,4 +6,7 @@
 - responsive leht -> tundub okei
 - injectioni kontroll --> teeme, kui jõuab
 - üldine disain
+- "teised isikud..." muutes nagu salvestamist otseselt pole. Peaks tegema selle, et kui nime muudab, siis muutub ka seal hallis alas nimi
+- kui lisada 2 isikut ja avada ühe muutmise aken ning seejärel teise muutmise aken, siis essa isiku nimele jääb "opened" klass külge. See vaja eemaldada
+- kui kasutaja vajutab esilehel "saada", siis võiks teise lehe enne uue data lisamist tühjaks teha. Võib probleeme tekitada vastasel juhul
 
