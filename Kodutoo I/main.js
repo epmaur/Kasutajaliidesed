@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    getListOfCounties();
     getListOfCountries();
     displayNumbers();
 	
@@ -11,7 +10,7 @@ $(document).ready(function() {
         if (val == 1) {
             $('#extras-header').html('Ruumi omamise tõend');
         } else if (val == 2) {
-            $('#extras-header').html('Kokkulepe (kaas)omanikuga');
+            $('#extras-header').html('Kokkulepe kaasomanikuga');
         } else if (val == 3) {
             $('#extras-header').html('Üürileping');
         } else {
@@ -49,34 +48,22 @@ $(document).ready(function() {
         }
     });
     
-    $('#send1').click(function() {
-			$('.error-message').hide();
-            $('#page1').fadeOut(500);
-            setTimeout(function() {
-                $('.animationload').show();
-            }, 400);
-            setTimeout(function() {
-                $('.animationload').hide();
-				makeSecondPage();
-                $('#page2').fadeIn(500);
-            }, 1000);
-						
-			/*
-        if (pageFilled() && radioButtonChecked()) {
-						$('.error-message').hide();
-            $('#page1').fadeOut(500);
-            setTimeout(function() {
-                $('.animationload').show();
-            }, 400);
-            setTimeout(function() {
-                $('.animationload').hide();
-                $('#page2').fadeIn(500);
-            }, 1000);
-        } else {
-						showBlankFields();
-						$('.error-message').show();
-        }
-				*/
+    $('#send1').click(function() {		
+	if (pageFilled() && radioButtonChecked()) {
+		$('.error-message').hide();
+		$('#page1').fadeOut(500);
+		setTimeout(function() {
+			$('.animationload').show();
+		}, 400);
+		setTimeout(function() {
+			$('.animationload').hide();
+			makeSecondPage();
+			$('#page2').fadeIn(500);
+		}, 1000);
+	} else {
+		showBlankFields();
+		$('.error-message').show();
+	}
     });
     $('#send2').click(function() {
         $('#page2').fadeOut(500);
@@ -132,11 +119,17 @@ function radioButtonChecked() {
 
 function pageFilled() {
     let ok = true;
-		let optionalFields = ["comment", "foreignID", "foreignResidence"];
+	let optionalFields = ["comment", "foreignID", "foreignResidence"];
+	let otherResidenceFields = ["riik2", "maakond2", "vald", "tanav", "postiindeks", "start", "end"];
     Array.prototype.forEach.call(document.getElementsByClassName('required'), function(input) {
-        if ($(input).val() === '' && $.inArray($(input).attr('id'), optionalFields) == -1) {
-            ok = false;
-        }
+		if ($(input).val() === '' && $.inArray($(input).attr('id'), optionalFields) == -1) {
+			if ($('#multipleResidences').is(':checked')) {
+				ok = false;
+			} else if (!$('#multipleResidences').is(':checked') && $.inArray($(input).attr('id'), otherResidenceFields) == -1) {
+				ok = false;
+			}
+		}
+		//otherPeoplesResidence
     });
     return ok;
 }
@@ -231,9 +224,11 @@ function getListOfCounties() {
     });
     $('#maakond2').autocomplete(options).bind('focus', function() {
         $(this).autocomplete("search");
-    }); 
+    });
+	
 }
 function getListOfCountries() {
+	getListOfCounties();
     var allCountries= [];
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "https://restcountries.eu/rest/v2/all", false);
