@@ -4,3 +4,4 @@
 - ei tõmbleks
 - input[type="text"] täpitähed
 - dokumenditüübi kontroll + userile info
+- onchange peal valideerimine
