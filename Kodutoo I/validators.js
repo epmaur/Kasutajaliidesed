@@ -9,7 +9,7 @@ $(document).ready(function() {
             e.preventDefault();
         }
     });
-    $('input[type="tel"]').change(function() {
+    $(document).on('change', 'input[type="tel"]', function() {
         const parent = $(this).parent();
         if (/^[+]{0,1}[0-9-]+[0-9]$/.test( $(this).val() )) {
             success(parent);
@@ -28,20 +28,28 @@ $(document).ready(function() {
             e.preventDefault();
         }
     });
-    $('.nr-input').change(function() {
+    $(document).on('change', '.nr-input', function() {
         const parent = $(this).parent();
-        if (parseInt($(this).val())) {
-            success(parent);
+        if ($(this).hasClass('id-code')) {
+            if ($(this).val().length === 11) {
+                success(parent);
+            } else {
+                fail(parent);
+            }
         } else {
-            fail(parent);
+            if (parseInt($(this).val())) {
+                success(parent);
+            } else {
+                fail(parent);
+            }
         }
     });
     
-    $('input[type="text"]').change(function() {
+    $(document).on('change', 'input[type="text"]', function() {
         const parent = $(this).parent();
         if ($(this).val().length > 0) {
             if ($(this).hasClass('no-nr') &&
-               /^[a-zA-Z]+$/.test($(this).val())) {
+               /^[a-zA-Z\s-]+$/.test($(this).val())) {
                 success(parent);
             } else if (!$(this).hasClass('no-nr')) {
                 success(parent);
@@ -54,7 +62,7 @@ $(document).ready(function() {
     });
 	
 
-	$('.email').change(function() {
+	$(document).on('change', '.email', function() {
         const parent = $(this).parent();
         if (validateEmail( $(this).val() )) {
             success(parent);

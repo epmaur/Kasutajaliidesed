@@ -4,7 +4,8 @@ $(document).ready(function() {
 	
     
     $('input[name="rights"]').on('change', function() {
-				$('#block-six').show();
+        $('#rights-wrapper').css('border', '1px solid transparent');
+        $('#block-six').show();
         const val = $(this).val();
         displayNumbers();
         if (val == 1) {
@@ -22,6 +23,7 @@ $(document).ready(function() {
         if (isFilled($(this).parent().find('#people-wrapper'))) {
             const block = $('#block-three #people-wrapper .form-group:last-child');
             $(block).hide();
+            $(block).append('<button class="btn btn-success" onclick="updatePerson(this)"><span class="glyphicon glyphicon-ok"></span></button>');
             $('<div class="person-info-wrapper"><div class="person-info"><span class="inner" onclick="startShowInfo(this)"><span class="saved-name">' + $('#block-three .form-group:last-child .inputdiv:first-child input').val() + ' ' + $('#block-three .form-group:last-child .inputdiv:nth-child(2) input').val() + '<span class="glyphicon glyphicon-pencil"></span></span></span><span class="glyphicon glyphicon-remove"></span></div></div>').insertBefore('#people-wrapper .form-group:last-child')
             addAnotherPerson();
         }
@@ -43,27 +45,33 @@ $(document).ready(function() {
     });
     
     $('#file-input').change(function(e) {
+        $(this).parent().removeClass('has-warning');
         if (e) {
             $('#file-input-displayed').val( $(this)[0].files[0].name );
         }
     });
     
     $('#send1').click(function() {		
-	if (pageFilled() && radioButtonChecked()) {
-		$('.error-message').hide();
-		$('#page1').fadeOut(500);
-		setTimeout(function() {
-			$('.animationload').show();
-		}, 400);
-		setTimeout(function() {
-			$('.animationload').hide();
-			makeSecondPage();
-			$('#page2').fadeIn(500);
-		}, 1000);
-	} else {
-		showBlankFields();
-		$('.error-message').show();
-	}
+        if (radioButtonChecked() && pageFilled()) {
+            $('.error-message').hide();
+            $('#page1').fadeOut(500);
+            setTimeout(function() {
+                $('.animationload').show();
+            }, 400);
+            setTimeout(function() {
+                $('.animationload').hide();
+                makeSecondPage();
+                $('#page2').fadeIn(500);
+            }, 1000);
+        } else {
+            if (!pageFilled()) {
+                showBlankFields();
+                $('.error-message').show();
+            }
+            if (!radioButtonChecked()) {
+                $('#rights-wrapper').css('border', '1px solid red');
+            }
+        }
     });
     $('#send2').click(function() {
         $('#page2').fadeOut(500);
@@ -73,29 +81,47 @@ $(document).ready(function() {
         setTimeout(function() {
             $('.animationload').hide();
             $('#page3').fadeIn(500);
-        }, 1000);
+        }, 500);
     });
-    $('#send3').click(function() {
+    $('.send3').click(function() {
         $('#page3').fadeOut(500);
         setTimeout(function() {
             $('.animationload').show();
         }, 400);
         setTimeout(function() {
-            $('.animationload').hide();
-            $('#page1').fadeIn(500);
-        }, 1000);
+            window.location.href = 'https://www.siseministeerium.ee/et/tegevusvaldkonnad/rahvastikutoimingud/elukohatoimingud';
+        }, 500);
     });
 });
 
+function updatePerson(button) {
+    const parent = $(button).parent();
+    if ($(parent).children('.has-warning').length === 0) {
+        const child = $(parent).prev().children().first().children().first();
+        $(child).click();
+        const firstName = $(parent).children().first().children().first().val();
+        const lastName = $(parent).children().eq(1).children().first().val();
+        $(child).children().first().html(firstName + ' ' + lastName + '<span class="glyphicon glyphicon-pencil"></span>');
+    } else {
+        console.log('ERROR');
+    }
+}
+
 function makeSecondPage() {
   	appendAnotherPerson($('#submitter-firstname').val() + ' ' + $('#submitter-lastname').val());
-  	Array.prototype.forEach.call(document.getElementsByClassName('other-people'), function(input) {
-	  	let firstname = $(input).find('#firstname').val();
-	  	let lastname = $(input).find('#lastname').val();
-	  	if (firstname.length > 0 && lastname.length > 0) {
-		  appendAnotherPerson(firstname + ' ' + lastname);
-		}
-    });
+    let index = 0;
+    if ($('#otherPeoplesResidence').is(':checked')) {
+        Array.prototype.forEach.call(document.getElementsByClassName('other-people'), function(input) {
+            if (index < document.getElementsByClassName('other-people').length) {
+                let firstname = $(input).find('#firstname').val();
+                let lastname = $(input).find('#lastname').val();
+                if (firstname.length > 0 && lastname.length > 0) {
+                  appendAnotherPerson(firstname + ' ' + lastname);
+                }
+                index++;
+            }
+        });
+    }
 }
 
 function appendAnotherPerson(name) {
@@ -170,7 +196,7 @@ function showInfo(blocks, index, el) {
 
 function addAnotherPerson() {
     $('#block-three #people-wrapper').append(
-        '<div class="form-group other-people" id="other-people"><div class="inputdiv"><input class="form-control" required id="firstname"><span class="floating-label">Eesnimi *</span></div><div class="inputdiv"><input class="form-control" required id="lastname"><span class="floating-label">Perenimi *</span></div><div class="inputdiv"><input class="form-control" required><span class="floating-label">Isikukood *</span></div><div class="inputdiv"><input class="form-control email" required><span class="floating-label">E-post *</span></div><div class="inputdiv"><input type="tel" class="form-control" required><span class="floating-label">Telefon *</span></div></div>');
+        '<div class="form-group other-people" id="other-people"><div class="inputdiv"><input  type="text" class="form-control" required id="firstname"><span class="floating-label">Eesnimi *</span></div><div class="inputdiv"><input type="text" class="form-control" required id="lastname"><span class="floating-label">Perenimi *</span></div><div class="inputdiv"><input class="form-control nr-input id-code" required><span class="floating-label">Isikukood *</span></div><div class="inputdiv"><input class="form-control email" required><span class="floating-label">E-post *</span></div><div class="inputdiv"><input type="tel" class="form-control" required><span class="floating-label">Telefon *</span></div></div>');
       
 }
 
