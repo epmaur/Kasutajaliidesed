@@ -9,3 +9,7 @@
 - kui kasutaja vajutab esilehel "saada", siis võiks teise lehe enne uue data lisamist tühjaks teha. Võib probleeme tekitada vastasel juhul
 - teiste isikute lisamisel ei tööta väljade validationid alates teise isiku lisamisest
 
+- kuupäev
+- veateated
+- ei tõmbleks
+- input[type="text"] täpitähed
