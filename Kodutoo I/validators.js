@@ -1,9 +1,9 @@
 $(document).ready(function() {
     $('input[type="tel"]').keydown(function (e) {
         if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190, 107, 16, 187, 189]) !== -1 ||
-            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
             (e.keyCode >= 35 && e.keyCode <= 40)) {
-                return;
+            return;
         }
         if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
             e.preventDefault();
@@ -17,12 +17,12 @@ $(document).ready(function() {
             fail(parent);
         }
     });
-    
+
     $('.nr-input').keydown(function (e) {
         if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
             (e.keyCode >= 35 && e.keyCode <= 40)) {
-                return;
+            return;
         }
         if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
             e.preventDefault();
@@ -44,12 +44,12 @@ $(document).ready(function() {
             }
         }
     });
-    
+
     $(document).on('change', 'input[type="text"]', function() {
         const parent = $(this).parent();
         if ($(this).val().length > 0) {
             if ($(this).hasClass('no-nr') &&
-               /^[a-zA-Z\s-]+$/.test($(this).val())) {
+                /^[a-zA-ZõäöüÕÄÖÜ\s-]+$/.test($(this).val())) {
                 success(parent);
             } else if (!$(this).hasClass('no-nr')) {
                 success(parent);
@@ -60,9 +60,9 @@ $(document).ready(function() {
             fail(parent);
         }
     });
-	
 
-	$(document).on('change', '.email', function() {
+
+    $(document).on('change', '.email', function() {
         const parent = $(this).parent();
         if (validateEmail( $(this).val() )) {
             success(parent);
@@ -70,22 +70,22 @@ $(document).ready(function() {
             fail(parent);
         }
     });
-	
-	var start = document.getElementById('start');
-	var end = document.getElementById('end');
-	start.addEventListener('change', function() {
-		if (start.value)
-			end.min = start.value;
-	}, false);
-	end.addEventListener('change', function() {
-		if (end.value)
-			start.max = end.value;
-	}, false);
-	
+
+    var start = document.getElementById('start');
+    var end = document.getElementById('end');
+    start.addEventListener('change', function() {
+        if (start.value)
+            end.min = start.value;
+    }, false);
+    end.addEventListener('change', function() {
+        if (end.value)
+            start.max = end.value;
+    }, false);
+
 });
 
 function validateEmail($email) {
-    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    var emailReg = /^([\w-\.õäöüÕÄÖÜ]+@([\w-]+\.)+[\w-]{2,4})?$/;
     return emailReg.test( $email );
 }
 

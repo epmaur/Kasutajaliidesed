@@ -1,233 +1,233 @@
 <!doctype html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta charset="utf-8">
-        <title>Elukohateade</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="main.css">
-        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css">
-    </head>
-    
-    <body>
-        <div class="animationload">
-            <div class="osahanloading"></div>
-        </div>
-        <div class="container" id="page1">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Elukohateade</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css">
+</head>
+
+<body>
+<div class="animationload">
+    <div class="osahanloading"></div>
+</div>
+<div class="container" id="page1">
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+            <h1>ELUKOHATEADE</h1>
+
+            <div class="row" id="block-one">
+                <h2><span class="index-nr"></span> ESITAJA</h2>
+                <div class="form-group">
+                    <div class="inputdiv">
+                        <input type="text" class="form-control no-nr required" id="submitter-firstname" required>
+                        <span class="floating-label">Eesnimi *</span>
+                    </div>
+                    <div class="inputdiv">
+                        <input type="text" class="form-control no-nr required" id="submitter-lastname" required>
+                        <span class="floating-label">Perenimi *</span>
+                    </div>
+                    <div class="inputdiv">
+                        <input class="form-control nr-input id-code required" required>
+                        <span class="floating-label">Isikukood *</span>
+                    </div>
+                    <div class="inputdiv">
+                        <input class="form-control email required" required>
+                        <span class="floating-label">E-post *</span>
+                    </div>
+                    <div class="form-group has-feedback inputdiv">
+                        <input type="tel" class="form-control required" required>
+                        <span class="floating-label">Telefon *</span>
+                    </div>
+                    <div class="inputdiv">
+                        <input class="form-control nr-input id-code required" required id="foreignID">
+                        <span class="floating-label">Välisriigi isikukood (olemasolul) </span>
+                    </div>
+                    <div class="inputdiv">
+                        <input type="text" class="form-control required" required id="foreignResidence">
+                        <span class="floating-label">Eelmine elukoht välismaal (olemasolul)</span>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
-                <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
-                    <h1>ELUKOHATEADE</h1>
-                    
-                    <div class="row" id="block-one">
-                        <h2><span class="index-nr"></span> ESITAJA</h2>
-                        <div class="form-group">
-                          <div class="inputdiv">
-                            <input type="text" class="form-control no-nr required" id="submitter-firstname" required>
+                <h2><span class="index-nr"></span> UUE ELUKOHA AADRESS</h2>
+                <div class="form-group">
+                    <div class="inputdiv">
+                        <input type="text" id="riik" class="form-control required" required>
+                        <span class="floating-label">Riik *</span>
+                    </div>
+                    <div class="inputdiv">
+                        <input type="text" id="maakond" class="form-control required" required>
+                        <span class="floating-label">Maakond *</span>
+                    </div>
+                    <div class="inputdiv">
+                        <input type="text" class="form-control required" required>
+                        <span class="floating-label">Vald/linn, alevik, küla *</span>
+                    </div>
+                    <div class="inputdiv">
+                        <input type="text" class="form-control required" required>
+                        <span class="floating-label">Tänav/talu, maja nr, korteri nr *</span>
+                    </div>
+                    <div class="inputdiv">
+                        <input type="text" class="form-control nr-input required" required>
+                        <span class="floating-label">Postiindeks *</span>
+                    </div>
+                    <label class="checkbox-label"><input onchange="changeOtherPeoplesResidence()" type="checkbox" id="otherPeoplesResidence" value="" class="checkbox">Soovin muuta ka teiste isikute elukohta</label>
+                    <label class="checkbox-label"><input type="checkbox" id="multipleResidences" onchange="multipleResidences()" class="checkbox">Elan ka mujal</label>
+                </div>
+            </div>
+
+            <div class="row" id="block-three" style="display: none">
+                <h2><span class="index-nr"></span> TEISED ISIKUD, KELLE ELUKOHA AADRESSI MUUDETAKSE</h2>
+                <div id="people"></div>
+                <div id="people-wrapper">
+                    <div class="form-group other-people" id="other-people">
+                        <div class="inputdiv">
+                            <input type="text" class="form-control no-nr" required id="firstname">
                             <span class="floating-label">Eesnimi *</span>
-                          </div>
-                          <div class="inputdiv">
-                            <input type="text" class="form-control no-nr required" id="submitter-lastname" required>
+                        </div>
+                        <div class="inputdiv">
+                            <input type="text" class="form-control no-nr" required id="lastname">
                             <span class="floating-label">Perenimi *</span>
-                          </div>
-                          <div class="inputdiv">
-                            <input class="form-control nr-input id-code required" required>
+                        </div>
+                        <div class="inputdiv">
+                            <input class="form-control nr-input id-code" required>
                             <span class="floating-label">Isikukood *</span>
-                          </div>
-                          <div class="inputdiv">
-                            <input class="form-control email required" required>
+                        </div>
+                        <div class="inputdiv">
+                            <input class="form-control email" required>
                             <span class="floating-label">E-post *</span>
-                          </div>
-                          <div class="form-group has-feedback inputdiv">
-                            <input type="tel" class="form-control required" required>
+                        </div>
+                        <div class="inputdiv">
+                            <input type="tel" class="form-control" required>
                             <span class="floating-label">Telefon *</span>
-                          </div>
-                          <div class="inputdiv">
-                            <input class="form-control nr-input id-code required" required id="foreignID">
-                            <span class="floating-label">Välisriigi isikukood (olemasolul) </span>
-                          </div>
-                          <div class="inputdiv">
-                            <input type="text" class="form-control required" required id="foreignResidence">
-                            <span class="floating-label">Eelmine elukoht välismaal (olemasolul)</span>
-                          </div>
                         </div>
                     </div>
-                    
-                    <div class="row">
-                        <h2><span class="index-nr"></span> UUE ELUKOHA AADRESS</h2>
-                        <div class="form-group">
-                          <div class="inputdiv">
-                            <input type="text" id="riik" class="form-control required" required>
-                            <span class="floating-label">Riik *</span>
-                          </div>
-                          <div class="inputdiv">
-                            <input type="text" id="maakond" class="form-control required" required>
-                            <span class="floating-label">Maakond *</span>
-                          </div>
-                          <div class="inputdiv">
-                            <input type="text" class="form-control required" required>
-                            <span class="floating-label">Vald/linn, alevik, küla *</span>
-                          </div>
-                          <div class="inputdiv">
-                            <input type="text" class="form-control required" required>
-                            <span class="floating-label">Tänav/talu, maja nr, korteri nr *</span>
-                          </div>
-                          <div class="inputdiv">
-                            <input type="text" class="form-control nr-input required" required>
-                            <span class="floating-label">Postiindeks *</span>
-                          </div>
-                            <label class="checkbox-label"><input onchange="changeOtherPeoplesResidence()" type="checkbox" id="otherPeoplesResidence" value="" class="checkbox">Soovin muuta ka teiste isikute elukohta</label>
-                            <label class="checkbox-label"><input type="checkbox" id="multipleResidences" onchange="multipleResidences()" class="checkbox">Elan ka mujal</label>
-                        </div>
+                </div>
+                <button class="btn btn-success" id="savePerson"><span class="glyphicon glyphicon-ok"></span></button>
+            </div>
+
+
+            <div class="row" id="block-four" style="display: none">
+                <h2><span class="index-nr"></span> ELAN KA MUJAL</h2>
+                <div class="form-group">
+                    <div class="inputdiv">
+                        <input type="text" class="form-control required" id="riik2" required>
+                        <span class="floating-label">Riik *</span>
                     </div>
-                    
-                    <div class="row" id="block-three" style="display: none">
-                        <h2><span class="index-nr"></span> TEISED ISIKUD, KELLE ELUKOHA AADRESSI MUUDETAKSE</h2>
-                        <div id="people"></div>
-                        <div id="people-wrapper">
-                            <div class="form-group other-people" id="other-people">
-                              <div class="inputdiv">
-                                <input type="text" class="form-control no-nr" required id="firstname">
-                                <span class="floating-label">Eesnimi *</span>
-                              </div>
-                              <div class="inputdiv">
-                                <input type="text" class="form-control no-nr" required id="lastname">
-                                <span class="floating-label">Perenimi *</span>
-                              </div>
-                              <div class="inputdiv">
-                                <input class="form-control nr-input id-code" required>
-                                <span class="floating-label">Isikukood *</span>
-                              </div>
-                              <div class="inputdiv">
-                                <input class="form-control email" required>
-                                <span class="floating-label">E-post *</span>
-                              </div>
-                              <div class="inputdiv">
-                                <input type="tel" class="form-control" required>
-                                <span class="floating-label">Telefon *</span>
-                              </div>
-                            </div>
-                        </div>
-                        <button class="btn btn-success" id="savePerson"><span class="glyphicon glyphicon-ok"></span></button>
+                    <div class="inputdiv">
+                        <input type="text" class="form-control required" id="maakond2" required>
+                        <span class="floating-label">Maakond *</span>
                     </div>
-                    
-                
-                    <div class="row" id="block-four" style="display: none">
-                        <h2><span class="index-nr"></span> ELAN KA MUJAL</h2>
-                        <div class="form-group">
-                          <div class="inputdiv">
-                            <input type="text" class="form-control required" id="riik2" required>
-                            <span class="floating-label">Riik *</span>
-                          </div>
-                          <div class="inputdiv">
-                            <input type="text" class="form-control required" id="maakond2" required>
-                            <span class="floating-label">Maakond *</span>
-                          </div>
-                          <div class="inputdiv">
-                            <input type="text" class="form-control required" id="vald" required>
-                            <span class="floating-label">Vald/linn, alevik, küla *</span>
-                          </div>
-                          <div class="inputdiv">
-                            <input type="text" class="form-control required" id="tanav" required>
-                            <span class="floating-label">Tänav/talu, maja nr, korteri nr *</span>
-                          </div>
-                          <div class="inputdiv">
-                            <input class="form-control nr-input required" id="postiindeks" required>
-                            <span class="floating-label">Postiindeks *</span>
-                          </div>
-                            <label style="margin:5px 0;">Kehtib alates<input id="start" type="date" required class="form-control required" placeholder="Kehtib alates"></label>
-                            <label style="margin:5px 0;">Kehtib kuni<input id="end" type="date" required class="form-control required" placeholder="Kehtib kuni"></label>
-                        </div>
+                    <div class="inputdiv">
+                        <input type="text" class="form-control required" id="vald" required>
+                        <span class="floating-label">Vald/linn, alevik, küla *</span>
                     </div>
-                  
-                    <div class="row" id="block-five">
-                        <h2><span class="index-nr"></span> RUUMI KASUTAMISE ÕIGUS</h2>
-                        <div class="form-group" id="rights-wrapper">
-                            <label>
-                                <input type="radio" name="rights" value="1">
-                                Olen omanik
-                            </label>
-                            <label>
-                                <input type="radio" name="rights" value="2">
-                                Olen kaasomanik
-                            </label>
-                            <label>
-                                <input type="radio" name="rights" value="3">
-                                Olen üürnik
-                            </label>
-                            <label>
-                                <input type="radio" name="rights" value="4">
-                                Muu alus
-                            </label>
-                        </div>
+                    <div class="inputdiv">
+                        <input type="text" class="form-control required" id="tanav" required>
+                        <span class="floating-label">Tänav/talu, maja nr, korteri nr *</span>
                     </div>
-                    
-                    <div class="row" id="block-six" style="display: none">
-                        <h2><span class="index-nr"></span> LISAD</h2>
-                        <div class="form-group">
-                            <div id="extras-header" class="extras-header"></div>
-                            <div class="inputdiv input-group">
-                                <input type="file" class="form-control" id="file-input"  placeholder="Lisa" style="display:none;">
-                                <label class="input-group-btn">
+                    <div class="inputdiv">
+                        <input class="form-control nr-input required" id="postiindeks" required>
+                        <span class="floating-label">Postiindeks *</span>
+                    </div>
+                    <label style="margin:5px 0;">Kehtib alates<input id="start" type="date" required class="form-control required" placeholder="Kehtib alates"></label>
+                    <label style="margin:5px 0;">Kehtib kuni<input id="end" type="date" required class="form-control required" placeholder="Kehtib kuni"></label>
+                </div>
+            </div>
+
+            <div class="row" id="block-five">
+                <h2><span class="index-nr"></span> RUUMI KASUTAMISE ÕIGUS</h2>
+                <div class="form-group" id="rights-wrapper">
+                    <label>
+                        <input type="radio" name="rights" value="1">
+                        Olen omanik
+                    </label>
+                    <label>
+                        <input type="radio" name="rights" value="2">
+                        Olen kaasomanik
+                    </label>
+                    <label>
+                        <input type="radio" name="rights" value="3">
+                        Olen üürnik
+                    </label>
+                    <label>
+                        <input type="radio" name="rights" value="4">
+                        Muu alus
+                    </label>
+                </div>
+            </div>
+
+            <div class="row" id="block-six" style="display: none">
+                <h2><span class="index-nr"></span> LISAD</h2>
+                <div class="form-group">
+                    <div id="extras-header" class="extras-header"></div>
+                    <div class="inputdiv input-group">
+                        <input type="file" class="form-control" id="file-input"  placeholder="Lisa" style="display:none;">
+                        <label class="input-group-btn">
                                     <span class="btn btn-default" id="choose-file">
-                                        CHOOSE FILE 
+                                        CHOOSE FILE
                                     </span>
-                                </label>
-                                <input class="form-control required" id="file-input-displayed" placeholder="Vali fail" readonly="readonly">
-                                
-                            </div>
-                            <div class="inputdiv">
-                              <input type="text" class="form-control" required id="comment">
-                              <span class="floating-label">Kommentaar</span>
-                            </div>
-                            
-                        </div>
+                        </label>
+                        <input class="form-control required" id="file-input-displayed" placeholder="Vali fail" readonly="readonly">
+
                     </div>
-                    
-                    <button type="button" class="btn btn-success" id="send1">SAADA</button>
-										<span class="error-message" style="display: none;">Vormis on vigaseid või täitmata jäänud väljasid!</span>
+                    <div class="inputdiv">
+                        <input type="text" class="form-control" required id="comment">
+                        <span class="floating-label">Kommentaar</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-success" id="send1">SAADA</button>
+            <span class="error-message" style="display: none;">Vormis on vigaseid või täitmata jäänud väljasid!</span>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="page2">
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+            <div class="saved-message">Aitäh! Teie andmed on salvestatud.</div>
+            <h4>TÄIENDAVAD ANDMED</h4>
+            <div class="optional-message">
+                <span class="glyphicon glyphicon-asterisk"></span>
+                Järgnevate andmete edastamine on vabatahtlik
+            </div>
+            <div class="row" id="block-seven">
+            </div>
+
+            <div class="row" style="padding:0;">
+                <div class="col-xs-6" style="text-align:left;padding:0;">
+                    <button type="button" class="btn btn-success" id="send2">SAADA</button>
+                </div>
+                <div class="col-xs-6" style="text-align:right;padding:0;">
+                    <button type="button" class="btn btn-default send3" style="margin-top:10px;box-shadow:2px 2px #eee;">TAGASI ESILEHELE</button>
                 </div>
             </div>
         </div>
-        
-        <div class="container" id="page2">
-            <div class="row">
-                <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
-                    <div class="saved-message">Aitäh! Teie andmed on salvestatud.</div>
-                    <h4>TÄIENDAVAD ANDMED</h4>
-                    <div class="optional-message">
-				        <span class="glyphicon glyphicon-asterisk"></span>
-                        Järgnevate andmete edastamine on vabatahtlik
-                    </div>
-                    <div class="row" id="block-seven">
-                    </div>
-                    
-                    <div class="row" style="padding:0;">
-                        <div class="col-xs-6" style="text-align:left;padding:0;">
-                            <button type="button" class="btn btn-success" id="send2">SAADA</button>
-                        </div>
-                        <div class="col-xs-6" style="text-align:right;padding:0;">
-                            <button type="button" class="btn btn-default send3" style="margin-top:10px;box-shadow:2px 2px #eee;">TAGASI ESILEHELE</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    </div>
+</div>
+
+<div class="container" id="page3">
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+            <h1 style="margin-bottom:30px;">Lisaandmed edukalt esitatud!</h1>
+
+            <button type="button" class="btn btn-default send3" style="box-shadow:2px 2px #eee;">TAGASI ESILEHELE</button>
         </div>
-        
-        <div class="container" id="page3">
-            <div class="row">
-                <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
-                    <h1 style="margin-bottom:30px;">Lisaandmed edukalt esitatud!</h1>
-                    
-                    <button type="button" class="btn btn-default send3" style="box-shadow:2px 2px #eee;">TAGASI ESILEHELE</button>
-                </div>
-            </div>
-        </div>
-        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="main.js"></script>
-        <script src="validators.js"></script>
-    </body>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="main.js"></script>
+<script src="validators.js"></script>
+</body>
 </html>

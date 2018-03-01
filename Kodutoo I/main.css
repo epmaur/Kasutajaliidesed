@@ -75,7 +75,7 @@ body {
 
 .inner.opened {
     background: #eee;
-    
+
 }
 
 .checkbox-label {
@@ -101,25 +101,25 @@ body {
 }
 
 .inputdiv {
-  position: relative !important;
-  margin:5px 0;
+    position: relative !important;
+    margin:5px 0;
 }
 
 .floating-label {
-  color:#ccc;
-  opacity: 0.8;
-  position: absolute;
-  pointer-events: none;
-  left: 13px;
-  top: 8px;
-  transition: 0.2s ease all;
+    color:#ccc;
+    opacity: 0.8;
+    position: absolute;
+    pointer-events: none;
+    left: 13px;
+    top: 8px;
+    transition: 0.2s ease all;
 }
 
 .form-control:focus ~ .floating-label,
 .form-control:not(:focus):valid ~ .floating-label{
-  right: 20px;
-  left: auto;
-  opacity: 1;
+    right: 20px;
+    left: auto;
+    opacity: 1;
 }
 
 #file-input-displayed {
@@ -209,15 +209,15 @@ body {
 }
 
 .row {
-		margin: auto;		
+    margin: auto;
 }
 
 .glyphicon-warning-sign {
-	color: red !important;
+    color: red !important;
 }
 
 .has-warning .form-control{
-	border-color: red;
+    border-color: red;
 }
 
 .error-message {
@@ -228,22 +228,22 @@ body {
 }
 
 #block-seven .form-group{
-  background: #eee;
-  padding: 10px;
-  border-radius: 4px;
-  margin-bottom: 20px;
+    background: #eee;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
 }
 
 #send2 {
-  margin-top:10px;
+    margin-top:10px;
 }
 
 .name-span {
-  background: #eee;
-  padding-left: 5px;
-  border-radius: 4px 4px 0 0;
-  font-weight: 500;
-  font-size: 15px;
+    background: #eee;
+    padding-left: 5px;
+    border-radius: 4px 4px 0 0;
+    font-weight: 500;
+    font-size: 15px;
 }
 
 #rights-wrapper {
