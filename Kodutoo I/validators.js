@@ -12,7 +12,7 @@ $(document).ready(function() {
             e.preventDefault();
         }
     });
-    $(document).on('keydown', 'input[type="tel"]', function() {
+    $(document).on('keyup', 'input[type="tel"]', function() {
         const parent = $(this).parent();
         if (/^[+]{0,1}[0-9-]+[0-9]$/.test( $(this).val() )) {
             success(parent);
@@ -31,7 +31,7 @@ $(document).ready(function() {
             e.preventDefault();
         }
     });
-    $(document).on('keydown', '.nr-input', function() {
+    $(document).on('keyup', '.nr-input', function() {
         const parent = $(this).parent();
         if ($(this).hasClass('id-code')) {
             if ($(this).val().length === 11) {
@@ -49,7 +49,7 @@ $(document).ready(function() {
     });
 
 
-    $(document).on('keydown', 'input[type="text"]', function() {
+    $(document).on('keyup', 'input[type="text"]', function() {
         const parent = $(this).parent();
         if ($(this).val().length > 0) {
             if ($(this).hasClass('no-nr') &&
@@ -66,7 +66,7 @@ $(document).ready(function() {
     });
 
 
-    $(document).on('keydown', '.email', function() {
+    $(document).on('keyup', '.email', function() {
         const parent = $(this).parent();
         if (validateEmail( $(this).val() )) {
             success(parent);
