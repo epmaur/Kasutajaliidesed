@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    $('.has-warning').tooltip();
+
+
     $('input[type="tel"]').keydown(function (e) {
         if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190, 107, 16, 187, 189]) !== -1 ||
             (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
@@ -9,12 +12,12 @@ $(document).ready(function() {
             e.preventDefault();
         }
     });
-    $(document).on('change', 'input[type="tel"]', function() {
+    $(document).on('keydown', 'input[type="tel"]', function() {
         const parent = $(this).parent();
         if (/^[+]{0,1}[0-9-]+[0-9]$/.test( $(this).val() )) {
             success(parent);
         } else {
-            fail(parent);
+            fail(parent, 'Liiga lühike telefoninumber');
         }
     });
 
@@ -28,13 +31,13 @@ $(document).ready(function() {
             e.preventDefault();
         }
     });
-    $(document).on('change', '.nr-input', function() {
+    $(document).on('keydown', '.nr-input', function() {
         const parent = $(this).parent();
         if ($(this).hasClass('id-code')) {
             if ($(this).val().length === 11) {
                 success(parent);
             } else {
-                fail(parent);
+                fail(parent, 'Isikukood peab olema 11 numbrimärki pikk');
             }
         } else {
             if (parseInt($(this).val())) {
@@ -45,7 +48,8 @@ $(document).ready(function() {
         }
     });
 
-    $(document).on('change', 'input[type="text"]', function() {
+
+    $(document).on('keydown', 'input[type="text"]', function() {
         const parent = $(this).parent();
         if ($(this).val().length > 0) {
             if ($(this).hasClass('no-nr') &&
@@ -53,35 +57,39 @@ $(document).ready(function() {
                 success(parent);
             } else if (!$(this).hasClass('no-nr')) {
                 success(parent);
-            } else {
-                fail(parent);
+            } else if ($(this).hasClass('no-nr')){
+                fail(parent, 'Ei tohi sisaldada numbreid');
             }
         } else {
-            fail(parent);
+            fail(parent, 'Pikkus peab olema vähemalt 1 tähemärk');
         }
     });
 
 
-    $(document).on('change', '.email', function() {
+    $(document).on('keydown', '.email', function() {
         const parent = $(this).parent();
         if (validateEmail( $(this).val() )) {
             success(parent);
         } else {
-            fail(parent);
+            fail(parent, 'Ebakorrektne e-mail');
         }
     });
 
-    var start = document.getElementById('start');
-    var end = document.getElementById('end');
-    start.addEventListener('change', function() {
-        if (start.value)
-            end.min = start.value;
-    }, false);
-    end.addEventListener('change', function() {
-        if (end.value)
-            start.max = end.value;
-    }, false);
+    $("#start").datepicker({
+        onSelect: function (selected) {
+            var dt = new Date(selected);
+            dt.setDate(dt.getDate() + 1);
+            $("#end").datepicker("option", "minDate", dt);
+        }
+    });
 
+    $("#end").datepicker({
+        onSelect: function (selected) {
+            var dt = new Date(selected);
+            dt.setDate(dt.getDate() - 1);
+            $("#start").datepicker("option", "maxDate", dt);
+        }
+    });
 });
 
 function validateEmail($email) {
@@ -89,13 +97,16 @@ function validateEmail($email) {
     return emailReg.test( $email );
 }
 
-function fail(parent) {
+function fail(parent, title) {
     $(parent).removeClass('has-success');
     if ($(parent).children().length === 3) {
         $(parent).children().last().remove();
     }
     $(parent).addClass('has-warning');
+    $(parent).tooltip('destroy');
+    $(parent).tooltip({'trigger':'hover', 'title': title, 'placement' : 'right'});
     $(parent).append('<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>');
+
 }
 
 function success(parent) {
@@ -104,5 +115,6 @@ function success(parent) {
         $(parent).children().last().remove();
     }
     $(parent).addClass('has-success');
+    $(parent).tooltip('destroy');
     $(parent).append('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
 }

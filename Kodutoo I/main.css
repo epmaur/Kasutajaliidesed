@@ -251,3 +251,11 @@ body {
     border-radius: 4px;
 }
 
+.form-control[readonly] {
+    background-color: white;
+}
+
+.tooltip-inner {
+    width: 300px;
+}
+

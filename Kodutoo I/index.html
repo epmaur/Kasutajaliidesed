@@ -134,8 +134,8 @@
                         <input class="form-control nr-input required" id="postiindeks" required>
                         <span class="floating-label">Postiindeks *</span>
                     </div>
-                    <label style="margin:5px 0;">Kehtib alates<input id="start" type="date" required class="form-control required" placeholder="Kehtib alates"></label>
-                    <label style="margin:5px 0;">Kehtib kuni<input id="end" type="date" required class="form-control required" placeholder="Kehtib kuni"></label>
+                    <label style="margin:5px 0;">Kehtib alates<input id="start" type="text" required class="form-control required" readonly="readonly"></label>
+                    <label style="margin:5px 0;">Kehtib kuni<input id="end" type="text" required class="form-control required" readonly="readonly"></label>
                 </div>
             </div>
 
@@ -166,7 +166,7 @@
                 <div class="form-group">
                     <div id="extras-header" class="extras-header"></div>
                     <div class="inputdiv input-group">
-                        <input type="file" class="form-control" id="file-input"  placeholder="Lisa" style="display:none;">
+                        <input type="file" class="form-control" id="file-input"  accept=".asic, .bdoc, .pdf" placeholder="Lisa" style="display:none;">
                         <label class="input-group-btn">
                                     <span class="btn btn-default" id="choose-file">
                                         CHOOSE FILE
@@ -222,7 +222,7 @@
         </div>
     </div>
 </div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
