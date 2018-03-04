@@ -1,5 +1,5 @@
 # Kasutajaliidesed TO-DO
-- kuupäev
-- veateated
-- dokumenditüübi kontroll + userile info
-- onchange peal valideerimine
+- kuupäev -> done
+- veateated -> done (teadete sõnastused üle vaadata)
+- dokumenditüübi kontroll + userile info ->done
+- onchange peal valideerimine -> bugine- funkab alates teisest tähemärgist
