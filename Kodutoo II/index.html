@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="main.js"></script>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <div id="container">
+        <div id="lives-wrapper">
+          <span class="life">
+            <span class="glyphicon glyphicon-heart"></span>
+          </span>
+
+          <span class="life">
+            <span class="glyphicon glyphicon-heart"></span>
+          </span>
+
+          <span class="life">
+            <span class="glyphicon glyphicon-heart"></span>
+          </span>
+        </div>
+
+        <div id="timer">00:10</div>
+        <div id="score">0</div>
+
+        <div id="game-wrapper">
+          <img id="desk-img" src="images/desk.png">
+
+          <img src="images/boss.jpg" id="boss-img">
+          <!--<div class="paper">-->
+            <!--<img src="images/html.png">-->
+          <!--</div>-->
+        </div>
+
+        <h1 id="start-msg">PRESS 'ENTER' TO START!</h1>
+
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <!--<h4 class="modal-title">Modal Header</h4>-->
+              </div>
+
+              <div class="modal-body">
+                <p>GAME OVER!</p>
+                <p>Your score: <span id="modal-score"></span></p>
+              </div>
+
+              <!--<div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>-->
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>
