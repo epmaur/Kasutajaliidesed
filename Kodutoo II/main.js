@@ -7,7 +7,7 @@ let timerInterval;
 let isTimerRunning = false;
 let displayedTimerInterval;
 const papers = ['html.png', 'pdf.png'];
-const distractions = ['9gag.png', 'messenger.png', 'yt.png'];
+const distractions = ['9gag.jpg', 'messenger.jpg', 'yt.jpg'];
 let correct = null;
 let score = 0;
 let game;
@@ -44,9 +44,17 @@ $(document).ready(function() {
 
         if (guess) {
           removeQueueItem();
+						hideTimer();
           if (guess === correct) {
             score++;
-            newImg();
+						if (score % 5 === 0) {
+								makeItRain();
+								$('#payday').addClass('payday-show');
+								setTimeout(function() {
+										$('#payday').removeClass('payday-show');
+								}, 2000);
+						}
+						newImg();
           } else {
             loseLife(false);
           }
@@ -68,9 +76,9 @@ function loseLife(isBonus) {
   if ( $('.glyphicon-heart').length === 1 ) {
     gameOver();
   }
-  if (isBonus) {
+  //if (isBonus) {
     newImg();
-  }
+  //}
 }
 
 function newImg() {
@@ -82,17 +90,25 @@ function newImg() {
 }
 
 function newPaper(img) {
+	$('.glyphicon-arrow-left').removeClass('blink-left');
+	$('.glyphicon-arrow-right').removeClass('blink-right');
+	$('.glyphicon-arrow-down').removeClass('blink-down');
   setTimeout(function () {
     $('.paper').remove();
     $('#boss-img').removeClass('boss-show');
     if (isTimerRunning) {
       if (img === 'html.png') {
+				console.log('html');
         correct = 'left-pile';
+				$('.glyphicon-arrow-left').addClass('blink-left');
       } else if (img === 'pdf.png') {
         correct = 'right-pile';
+				console.log('pdf');
+				$('.glyphicon-arrow-right').addClass('blink-right');
       } else {
         $('#boss-img').addClass('boss-show');
         correct = 'down-pile';
+				$('.glyphicon-arrow-down').addClass('blink-down');
         startTimer();
       }
       $(game).append('<div class="paper">\n' +
@@ -106,6 +122,7 @@ function startTimer() {
   clearInterval(displayedTimerInterval);
   $('#timer').html('00:10');
   $('#timer').css('visibility', 'visible');
+	$('#hurry').css('visibility', 'visible');
   displayedTimer = TIMERDEFAULT;
   let zero = '';
   if (displayedTimer < 10) {
@@ -114,10 +131,10 @@ function startTimer() {
   $('#timer').html('00:' + zero + displayedTimer);
   displayedTimerInterval = setInterval(function() {
     if (displayedTimer === 1) {
-      clearInterval(displayedTimerInterval);
       $('#timer').html('00:00');
       loseLife(true);
-      $('#timer').css('visibility', 'hidden');
+			removeQueueItem();
+				hideTimer();
     } else {
       --displayedTimer;
       let zero = '';
@@ -129,16 +146,29 @@ function startTimer() {
   }, 1000);
 }
 
+function hideTimer() {
+		clearInterval(displayedTimerInterval);
+		$('#timer').css('visibility', 'hidden');
+			$('#hurry').css('visibility', 'hidden');
+}
+
 function newGame() {
+		$('#lives-wrapper').html('<span class="life"><span class="glyphicon glyphicon-heart"></span></span><span class="life"><span class="glyphicon glyphicon-heart"></span></span><span class="life"><span class="glyphicon glyphicon-heart"></span></span>');
+	$('#timer').css('visibility', 'hidden');
+	$('#hurry').css('visibility', 'hidden');
   $('#boss-img').removeClass('boss-show');
   $('#myModal').modal('hide');
   $('#start-msg').css('opacity', '0');
+	$('#pending-tasks').children().removeClass('ohnoes');
   newImg();
   // startTimer();
   startPaperTimer();
   isTimerRunning = true;
   score = 0;
   $('#score').html(score);
+		removeQueueItem();
+		removeQueueItem();
+		removeQueueItem();
 }
 
 function gameOver() {
@@ -162,14 +192,46 @@ function newQueueItem() {
     loseLife(false);
   } else {
     $('#pending-tasks').append('<img src="images/paber.png">');
+		$('#pending-tasks').children().removeClass('ohnoes');
     if ( $('#pending-tasks').children().length === 4) {
       $('#pending-tasks .text').css('color', 'red');
+			$('#pending-tasks .text').css('font-weight', '500');
+			$('#pending-tasks').children().slice(1).addClass('ohnoes');
     }
   }
 }
 
 function removeQueueItem() {
+	$('#pending-tasks').children().removeClass('ohnoes');
+	$('#pending-tasks .text').css('font-weight', '400');
+	$('#pending-tasks .text').css('color', 'black');
   if ( $('#pending-tasks').children().length > 1) {
     $('#pending-tasks').children().last().remove();
   }
 }
+
+function makeItRain(){
+			var maxBills = 30;
+
+			for (var i = 0; i < maxBills; i++){
+
+			var random = $(window).width();
+			var randomPosition = Math.floor(random*Math.random());
+			var randomTime = Math.random();
+			var randomSpeed = (Math.random() + 2) ;
+
+			var bills = $("<span class='billsBillsBills'>")
+				.css({
+					left : randomPosition,
+					top: '-150px',
+					"-webkit-animation-delay" : randomTime + "s",
+					"-webkit-animation-duration" : randomSpeed + "s"
+				});
+					
+				$(bills).prepend('<img src="images/bill.svg">');
+					
+
+				$('#container').append(bills);
+		} 
+}; 
+
