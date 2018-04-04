@@ -127,7 +127,17 @@ body {
   right: -110px !important;
 }
 
+#score {
+	font-size: 25px;
+}
 
+#timer {
+	font-size: 30px;
+}
+
+.arrows {
+	margin-top:5px;
+}
 .bottom-row,
 .top-row{
     display: flex;
