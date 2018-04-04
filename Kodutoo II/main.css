@@ -42,6 +42,9 @@ body {
   text-align: center;
   width: 100%;
 }
+#timer {
+  visibility: hidden;
+}
 
 #game-wrapper #desk-img {
   width: 50%;
@@ -222,4 +225,12 @@ body {
     100% {
         text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
     }
+}
+
+#pending-tasks {
+  position: absolute;
+  left: 50px;
+}
+#pending-tasks img {
+  width: 50px;
 }

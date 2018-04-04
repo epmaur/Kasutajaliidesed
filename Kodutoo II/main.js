@@ -1,8 +1,11 @@
 const TIMERDEFAULT = 10;
 
+let displayedTimer = TIMERDEFAULT;
+// let displayedTimer = TIMERDEFAULT;
 let timer = TIMERDEFAULT;
-let isTimerRunning = false;
 let timerInterval;
+let isTimerRunning = false;
+let displayedTimerInterval;
 const papers = ['html.png', 'pdf.png'];
 const distractions = ['9gag.png', 'messenger.png', 'yt.png'];
 let correct = null;
@@ -40,19 +43,12 @@ $(document).ready(function() {
         }
 
         if (guess) {
-          newImg();
+          removeQueueItem();
           if (guess === correct) {
             score++;
+            newImg();
           } else {
-            score--;
-            const life = $('#lives-wrapper').children().last();
-            $(life).addClass('life-lost');
-            setTimeout(function() {
-              $(life).remove();
-            }, 1000);
-            if ( $('.glyphicon-heart').length === 1 ) {
-              gameOver();
-            }
+            loseLife(false);
           }
         }
         $('#score').html(score);
@@ -62,8 +58,23 @@ $(document).ready(function() {
   });
 });
 
+function loseLife(isBonus) {
+  score--;
+  const life = $('#lives-wrapper').children().last();
+  $(life).addClass('life-lost');
+  setTimeout(function() {
+    $(life).remove();
+  }, 1000);
+  if ( $('.glyphicon-heart').length === 1 ) {
+    gameOver();
+  }
+  if (isBonus) {
+    newImg();
+  }
+}
+
 function newImg() {
-  if (Math.round(Math.random()) === 0) {
+  if (Math.random() > 0.2) {
     newPaper(papers[Math.floor(Math.random() * papers.length)]);
   } else {
     newPaper(distractions[Math.floor(Math.random() * distractions.length)]);
@@ -82,6 +93,7 @@ function newPaper(img) {
       } else {
         $('#boss-img').addClass('boss-show');
         correct = 'down-pile';
+        startTimer();
       }
       $(game).append('<div class="paper">\n' +
           '          <img src="images/' + img + '">\n' +
@@ -91,23 +103,28 @@ function newPaper(img) {
 }
 
 function startTimer() {
-  timer = TIMERDEFAULT;
+  clearInterval(displayedTimerInterval);
+  $('#timer').html('00:10');
+  $('#timer').css('visibility', 'visible');
+  displayedTimer = TIMERDEFAULT;
   let zero = '';
-  if (timer < 10) {
+  if (displayedTimer < 10) {
     zero = '0'
   }
-  $('#timer').html('00:' + zero + timer);
-  timerInterval = setInterval(function() {
-    if (timer === 1) {
+  $('#timer').html('00:' + zero + displayedTimer);
+  displayedTimerInterval = setInterval(function() {
+    if (displayedTimer === 1) {
+      clearInterval(displayedTimerInterval);
       $('#timer').html('00:00');
-      gameOver();
+      loseLife(true);
+      $('#timer').css('visibility', 'hidden');
     } else {
-      --timer;
+      --displayedTimer;
       let zero = '';
-      if (timer < 10) {
+      if (displayedTimer < 10) {
         zero = '0'
       }
-      $('#timer').html('00:' + zero + timer);
+      $('#timer').html('00:' + zero + displayedTimer);
     }
   }, 1000);
 }
@@ -117,7 +134,8 @@ function newGame() {
   $('#myModal').modal('hide');
   $('#start-msg').css('opacity', '0');
   newImg();
-  startTimer();
+  // startTimer();
+  startPaperTimer();
   isTimerRunning = true;
   score = 0;
   $('#score').html(score);
@@ -127,7 +145,31 @@ function gameOver() {
   $('.paper').remove();
   $('#start-msg').css('opacity', '1');
   isTimerRunning = false;
+  clearInterval(displayedTimerInterval);
   clearInterval(timerInterval);
   $('#modal-score').html(score);
   $('#myModal').modal();
+}
+
+function startPaperTimer() {
+  timerInterval = setInterval(function() {
+    newQueueItem();
+  }, 10000);
+}
+
+function newQueueItem() {
+  if ( $('#pending-tasks').children().length >= 4 ) {
+    loseLife(false);
+  } else {
+    $('#pending-tasks').append('<img src="images/paber.png">');
+    if ( $('#pending-tasks').children().length === 4) {
+      $('#pending-tasks .text').css('color', 'red');
+    }
+  }
+}
+
+function removeQueueItem() {
+  if ( $('#pending-tasks').children().length > 1) {
+    $('#pending-tasks').children().last().remove();
+  }
 }
