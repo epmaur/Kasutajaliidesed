@@ -8,7 +8,10 @@
   $pass = "progress";
 
   $databaseName = "st2014";
-  $tableName = "ui_t3_142766_students";
+  $tableName = $_GET['tableName'];
+  if (!$tableName) {
+    echo 'NO TABLE NAME GIVEN!';
+  }
 
   //--------------------------------------------------------------------------
   // 1) Connect to mysql database
