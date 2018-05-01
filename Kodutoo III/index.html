@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Kodutöö 3</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+  </head>
+  <body>
+
+    <div id="due-date-wrapper">
+      <h1>18.04.2018</h1>
+      <button class="btn btn-success">Pikenda</button>
+    </div>
+
+    <div class="container">
+      <div>
+        <div class="form-group inline-block">
+          <div class="label">Nimi</div>
+          <input type="text" class="form-control" placeholder="Tudeng #1">
+          <input type="text" class="form-control" placeholder="Tudeng #2">
+        </div>
+
+        <div class="form-group inline-block">
+          <div class="label">Kood</div>
+          <input type="text" class="form-control" placeholder="Tudeng #1">
+          <input type="text" class="form-control" placeholder="Tudeng #2">
+        </div>
+      </div>
+
+      <div>Töö aadress</div>
+      <input type="url" class="form-control input-long" placeholder="URL">
+
+      <div id="base-points">
+        <h1>Baasülesanne</h1>
+
+        <div class="form-group">
+          <div class="inline-block"><div>Ootejärjekord</div></div>
+          <input type="number" class="form-control input-small inline-block" placeholder="0">
+          <input type="text" class="form-control inline-block" placeholder="Kommentaar">
+        </div>
+
+        <div class="form-group">
+          <div class="inline-block"><div>Sortimine</div></div>
+          <input type="number" class="form-control input-small inline-block" placeholder="0">
+          <input type="text" class="form-control inline-block" placeholder="Kommentaar">
+        </div>
+
+        <div class="form-group">
+          <div class="inline-block"><div>Tähtajaline lisaülesanne</div></div>
+          <input type="number" class="form-control input-small inline-block" placeholder="0">
+          <input type="text" class="form-control inline-block" placeholder="Kommentaar">
+        </div>
+
+        <div class="form-group">
+          <div class="inline-block"><div>Elude kaotamine</div></div>
+          <input type="number" class="form-control input-small inline-block" placeholder="0">
+          <input type="text" class="form-control inline-block" placeholder="Kommentaar">
+        </div>
+
+        <div class="form-group">
+          <div class="inline-block"><div>Mängu läbikukkumine, punktid ja kordamine</div></div>
+          <input type="number" class="form-control input-small inline-block" placeholder="0">
+          <input type="text" class="form-control inline-block" placeholder="Kommentaar">
+        </div>
+
+        <div class="form-group">
+          <div class="inline-block"><div>Kasutaja tähelepanu juhitakse animatsioonidega</div></div>
+          <input type="number" class="form-control input-small inline-block" placeholder="0">
+          <input type="text" class="form-control inline-block" placeholder="Kommentaar">
+        </div>
+      </div>
+
+      <div id="extra-points">
+        <h1>Lisaülesanded</h1>
+
+        <div class="form-group">
+          <div class="inline-block">Ilus kujundus</div>
+          <input type="checkbox" class="form-control inline-block">
+        </div>
+
+        <div class="form-group">
+          <div class="inline-block">Mängu kujundus toetab teemat</div>
+          <input type="checkbox" class="form-control inline-block">
+        </div>
+
+        <div class="form-group">
+          <div class="inline-block">Head ilmumised</div>
+          <input type="checkbox" class="form-control inline-block">
+        </div>
+
+        <div class="form-group">
+          <div class="inline-block">Hea sortimise tagasiside</div>
+          <input type="checkbox" class="form-control inline-block">
+        </div>
+
+        <div class="form-group">
+          <div class="inline-block">Hea lisaülesande "episood"</div>
+          <input type="checkbox" class="form-control inline-block">
+        </div>
+
+        <div class="form-group">
+          <div class="inline-block">Hea läbikukkumiste tagasiside</div>
+          <input type="checkbox" class="form-control inline-block">
+        </div>
+
+        <div class="form-group">
+          <div class="inline-block">Heliline tagasiside</div>
+          <input type="checkbox" class="form-control inline-block">
+        </div>
+
+        <div class="form-group">
+          <div class="inline-block">Mängu õpitavus on hea</div>
+          <input type="checkbox" class="form-control inline-block">
+        </div>
+
+        <div class="form-group">
+          <div class="inline-block">Sorditavaid objekte saab lohistada (drag&drop)</div>
+          <input type="checkbox" class="form-control inline-block">
+        </div>
+
+        <div class="form-group">
+          <div class="inline-block">Töötab ka mobiilil</div>
+          <input type="checkbox" class="form-control inline-block">
+        </div>
+      </div>
+
+      <div id="additional-points">
+        <h1>Täiendavad andmed</h1>
+
+        <div class="form-group">
+          <div class="inline-block"><div>Lisapunktid</div></div>
+          <input type="number" class="form-control input-small inline-block" placeholder="0">
+          <input type="text" class="form-control inline-block" placeholder="Kommentaar">
+        </div>
+
+        <div class="form-group">
+          <div class="inline-block"><div>Hilinemine</div></div>
+          <input type="number" class="form-control input-small inline-block" placeholder="0">
+          <input type="text" class="form-control inline-block" placeholder="Kommentaar">
+        </div>
+
+        <div class="form-group">
+          <div class="inline-block">Plagiaat</div>
+          <input type="checkbox" class="form-control inline-block">
+          <input type="text" class="form-control inline-block" placeholder="Lahendus">
+        </div>
+      </div>
+
+      <table id="summary-table">
+        <tbody>
+          <tr>
+            <td>Baasülesanne</td>
+            <td>7</td>
+          </tr>
+          <tr>
+            <td>Lisaülesanded</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>Lisapunktid</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>Hilinemine</td>
+            <td>-2</td>
+          </tr>
+          <tr>
+            <td>Kokku</td>
+            <td>17</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div id="checkboxes-wrapper">
+        <div class="form-group">
+          <div class="inline-block">Arvestatud</div>
+          <input type="checkbox" class="form-control inline-block">
+        </div>
+
+        <div class="form-group">
+          <div class="inline-block">Märkimisväärne töö</div>
+          <input type="checkbox" class="form-control inline-block">
+        </div>
+      </div>
+
+      <button class="btn btn-light">Tagasi</button>
+      <button class="btn btn-lg btn-success">Salvesta</button>
+
+    </div>
+  </body>
+</html>

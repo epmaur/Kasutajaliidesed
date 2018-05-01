@@ -1,0 +1,55 @@
+body {
+  text-align: center;
+  padding: 50px;
+}
+
+input {
+  max-width: 250px;
+  margin: 0 auto;
+}
+input[type="checkbox"] {
+  width: auto;
+}
+input.input-long {
+  max-width: 350px;
+}
+input.input-small {
+  max-width: 50px;
+  text-align: center;
+}
+
+.inline-block {
+  display: inline-block;
+}
+.inline-block div.label {
+  text-align: left;
+}
+.inline-block input {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#base-points .form-group div.inline-block {
+  width: 300px;
+  max-width: 300px;
+  text-align: left;
+}
+
+#due-date-wrapper {
+  position: fixed;
+  top: 50px;
+  left: 50px;
+}
+
+#summary-table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  /*border-radius: 3px;*/
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+#summary-table td {
+  padding: 5px;
+}
