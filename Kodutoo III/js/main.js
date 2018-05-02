@@ -13,10 +13,10 @@ $(document).ready(function() {
   $('#submit').click(function() {
     const student1 = students.filter(x => x.student_code === $('#student1_code').val())[0];
     const student2 = students.filter(x => x.student_code === $('#student2_code').val())[0];
-    console.log('student1:', student1);
+    console.log('bu1_c:', $('#bu1_c').val(), typeof $('#bu1_c').val());
     const data = {
       'tableName': WORK_TABLE_NAME,
-      'due_date': $('').val(),
+      'due_date': '02.05.2018',
       'student1_id': student1.id,
       'student2_id': student2.id,
       'url': $('#url').val(),
@@ -32,24 +32,24 @@ $(document).ready(function() {
       'bu5_c': $('#bu5_c').val(),
       'bu6_p': $('#bu6_p').val(),
       'bu6_c': $('#bu6_c').val(),
-      'lu1': $('#lu1').val(),
-      'lu2': $('#lu2').val(),
-      'lu3': $('#lu3').val(),
-      'lu4': $('#lu4').val(),
-      'lu5': $('#lu5').val(),
-      'lu6': $('#lu6').val(),
-      'lu7': $('#lu7').val(),
-      'lu8': $('#lu8').val(),
-      'lu9': $('#lu9').val(),
-      'lu10': $('#lu10').val(),
-      'extra_p': $('#extra-p').val(),
+      'lu1': $('#lu1').is(':checked'),
+      'lu2': $('#lu2').is(':checked'),
+      'lu3': $('#lu3').is(':checked'),
+      'lu4': $('#lu4').is(':checked'),
+      'lu5': $('#lu5').is(':checked'),
+      'lu6': $('#lu6').is(':checked'),
+      'lu7': $('#lu7').is(':checked'),
+      'lu8': $('#lu8').is(':checked'),
+      'lu9': $('#lu9').is(':checked'),
+      'lu10': $('#lu10').is(':checked'),
+      'extra_p': $('#extra_p').val(),
       'extra_c': $('#extra_c').val(),
       'late_p': $('#late_p').val(),
       'late_c': $('#late_c').val(),
-      'plag_p': $('#plag_p').val(),
+      'plag_p': $('#plag_p').is(':checked'),
       'plag_c': $('#plag_c').val(),
-      'done': $('#done').val(),
-      'cool': $('#cool').val()
+      'done': $('#done').is(':checked'),
+      'cool': $('#cool').is(':checked')
     };
     $.ajax({
       url: 'post.php',

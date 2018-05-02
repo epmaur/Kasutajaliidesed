@@ -8,188 +8,262 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
 
-    <div id="due-date-wrapper">
-      <h1>18.04.2018</h1>
-      <button class="btn btn-success">Pikenda</button>
+  <div id="main-container">
+    <div v-if="this.tab === 1" id="index">
+      <div id="due-date-wrapper">
+        <h1>18.04.2018</h1>
+        <button class="btn btn-success">Pikenda</button>
+      </div>
+
+      <div class="container">
+        <div>
+          <div class="form-group inline-block">
+            <div class="label">Nimi</div>
+            <input v-if="this.work" type="text" class="form-control" id="student1_name" placeholder="Tudeng #1" v-model="this.work.student1.name">
+            <input v-else type="text" class="form-control" id="student1_name" placeholder="Tudeng #1">
+            <input v-if="this.work" type="text" class="form-control" id="student2_name" placeholder="Tudeng #2" v-model="this.work.student2.name">
+            <input v-else type="text" class="form-control" id="student2_name" placeholder="Tudeng #2">
+          </div>
+
+          <div class="form-group inline-block">
+            <div class="label">Kood</div>
+            <input v-if="this.work" type="text" class="form-control" id="student1_code" placeholder="Tudeng #1" v-model="this.work.student1.student_code">
+            <input v-else type="text" class="form-control" id="student1_code" placeholder="Tudeng #1">
+            <input v-if="this.work" type="text" class="form-control" id="student2_code" placeholder="Tudeng #1" v-model="this.work.student2.student_code">
+            <input v-else type="text" class="form-control" id="student2_code" placeholder="Tudeng #2">
+          </div>
+        </div>
+
+        <div>Töö aadress</div>
+        <input type="url" class="form-control input-long" id="url" placeholder="URL">
+
+        <div id="base-points">
+          <h1>Baasülesanne</h1>
+
+          <div class="form-group">
+            <div class="inline-block"><div>Ootejärjekord</div></div>
+            <input type="number" class="form-control input-small inline-block" id="bu1_p" placeholder="0">
+            <input type="text" class="form-control inline-block" id="bu1_c" placeholder="Kommentaar">
+          </div>
+
+          <div class="form-group">
+            <div class="inline-block"><div>Sortimine</div></div>
+            <input type="number" class="form-control input-small inline-block" id="bu2_p" placeholder="0">
+            <input type="text" class="form-control inline-block" id="bu2_c" placeholder="Kommentaar">
+          </div>
+
+          <div class="form-group">
+            <div class="inline-block"><div>Tähtajaline lisaülesanne</div></div>
+            <input type="number" class="form-control input-small inline-block" id="bu3_p" placeholder="0">
+            <input type="text" class="form-control inline-block" id="bu3_c" placeholder="Kommentaar">
+          </div>
+
+          <div class="form-group">
+            <div class="inline-block"><div>Elude kaotamine</div></div>
+            <input type="number" class="form-control input-small inline-block" id="bu4_p" placeholder="0">
+            <input type="text" class="form-control inline-block" id="bu4_c" placeholder="Kommentaar">
+          </div>
+
+          <div class="form-group">
+            <div class="inline-block"><div>Mängu läbikukkumine, punktid ja kordamine</div></div>
+            <input type="number" class="form-control input-small inline-block" id="bu5_p" placeholder="0">
+            <input type="text" class="form-control inline-block" id="bu5_c" placeholder="Kommentaar">
+          </div>
+
+          <div class="form-group">
+            <div class="inline-block"><div>Kasutaja tähelepanu juhitakse animatsioonidega</div></div>
+            <input type="number" class="form-control input-small inline-block" id="bu6_p" placeholder="0">
+            <input type="text" class="form-control inline-block" id="bu6_c" placeholder="Kommentaar">
+          </div>
+        </div>
+
+        <div id="extra-points">
+          <h1>Lisaülesanded</h1>
+
+          <div class="form-group">
+            <div class="inline-block">Ilus kujundus</div>
+            <input type="checkbox" class="form-control inline-block" id="lu1">
+          </div>
+
+          <div class="form-group">
+            <div class="inline-block">Mängu kujundus toetab teemat</div>
+            <input type="checkbox" class="form-control inline-block" id="lu2">
+          </div>
+
+          <div class="form-group">
+            <div class="inline-block">Head ilmumised</div>
+            <input type="checkbox" class="form-control inline-block" id="lu3">
+          </div>
+
+          <div class="form-group">
+            <div class="inline-block">Hea sortimise tagasiside</div>
+            <input type="checkbox" class="form-control inline-block" id="lu4">
+          </div>
+
+          <div class="form-group">
+            <div class="inline-block">Hea lisaülesande "episood"</div>
+            <input type="checkbox" class="form-control inline-block" id="lu5">
+          </div>
+
+          <div class="form-group">
+            <div class="inline-block">Hea läbikukkumiste tagasiside</div>
+            <input type="checkbox" class="form-control inline-block" id="lu6">
+          </div>
+
+          <div class="form-group">
+            <div class="inline-block">Heliline tagasiside</div>
+            <input type="checkbox" class="form-control inline-block" id="lu7">
+          </div>
+
+          <div class="form-group">
+            <div class="inline-block">Mängu õpitavus on hea</div>
+            <input type="checkbox" class="form-control inline-block" id="lu8">
+          </div>
+
+          <div class="form-group">
+            <div class="inline-block">Sorditavaid objekte saab lohistada (drag&drop)</div>
+            <input type="checkbox" class="form-control inline-block" id="lu9">
+          </div>
+
+          <div class="form-group">
+            <div class="inline-block">Töötab ka mobiilil</div>
+            <input type="checkbox" class="form-control inline-block" id="lu10">
+          </div>
+        </div>
+
+        <div id="additional-points">
+          <h1>Täiendavad andmed</h1>
+
+          <div class="form-group">
+            <div class="inline-block"><div>Lisapunktid</div></div>
+            <input type="number" class="form-control input-small inline-block" id="extra_p" placeholder="0">
+            <input type="text" class="form-control inline-block" id="extra_c" placeholder="Kommentaar">
+          </div>
+
+          <div class="form-group">
+            <div class="inline-block"><div>Hilinemine</div></div>
+            <input type="number" class="form-control input-small inline-block" id="late_p" placeholder="0">
+            <input type="text" class="form-control inline-block" id="late_c" placeholder="Kommentaar">
+          </div>
+
+          <div class="form-group">
+            <div class="inline-block">Plagiaat</div>
+            <input type="checkbox" class="form-control inline-block" id="plag_p">
+            <input type="text" class="form-control inline-block" id="plag_c" placeholder="Lahendus">
+          </div>
+        </div>
+
+        <table id="summary-table">
+          <tbody>
+            <tr>
+              <td>Baasülesanne</td>
+              <td id="bu-total">7</td>
+            </tr>
+            <tr>
+              <td>Lisaülesanded</td>
+              <td id="lu-total">10</td>
+            </tr>
+            <tr>
+              <td>Lisapunktid</td>
+              <td id="extra-p">2</td>
+            </tr>
+            <tr>
+              <td>Hilinemine</td>
+              <td id="late-p">-2</td>
+            </tr>
+            <tr>
+              <td>Kokku</td>
+              <td id="total">17</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div id="checkboxes-wrapper">
+          <div class="form-group">
+            <div class="inline-block">Arvestatud</div>
+            <input type="checkbox" class="form-control inline-block" id="done">
+          </div>
+
+          <div class="form-group">
+            <div class="inline-block">Märkimisväärne töö</div>
+            <input type="checkbox" class="form-control inline-block" id="cool">
+          </div>
+        </div>
+
+        <button class="btn btn-light">Tagasi</button>
+        <button class="btn btn-lg btn-success" id="submit">Salvesta</button>
+
+      </div>
     </div>
 
-    <div class="container">
-      <div>
-        <div class="form-group inline-block">
-          <div class="label">Nimi</div>
-          <input type="text" class="form-control" id="student1_name" placeholder="Tudeng #1">
-          <input type="text" class="form-control" id="student2_name" placeholder="Tudeng #2">
-        </div>
-
-        <div class="form-group inline-block">
-          <div class="label">Kood</div>
-          <input type="text" class="form-control" id="student1_code" placeholder="Tudeng #1">
-          <input type="text" class="form-control" id="student2_code" placeholder="Tudeng #2">
-        </div>
-      </div>
-
-      <div>Töö aadress</div>
-      <input type="url" class="form-control input-long" id="url" placeholder="URL">
-
-      <div id="base-points">
-        <h1>Baasülesanne</h1>
-
-        <div class="form-group">
-          <div class="inline-block"><div>Ootejärjekord</div></div>
-          <input type="number" class="form-control input-small inline-block" id="bu1_p" placeholder="0">
-          <input type="text" class="form-control inline-block" id="bu1_c" placeholder="Kommentaar">
-        </div>
-
-        <div class="form-group">
-          <div class="inline-block"><div>Sortimine</div></div>
-          <input type="number" class="form-control input-small inline-block" id="bu2_p" placeholder="0">
-          <input type="text" class="form-control inline-block" id="bu2_c" placeholder="Kommentaar">
-        </div>
-
-        <div class="form-group">
-          <div class="inline-block"><div>Tähtajaline lisaülesanne</div></div>
-          <input type="number" class="form-control input-small inline-block" id="bu3_p" placeholder="0">
-          <input type="text" class="form-control inline-block" id="bu3_c" placeholder="Kommentaar">
-        </div>
-
-        <div class="form-group">
-          <div class="inline-block"><div>Elude kaotamine</div></div>
-          <input type="number" class="form-control input-small inline-block" id="bu4_p" placeholder="0">
-          <input type="text" class="form-control inline-block" id="bu4_c" placeholder="Kommentaar">
-        </div>
-
-        <div class="form-group">
-          <div class="inline-block"><div>Mängu läbikukkumine, punktid ja kordamine</div></div>
-          <input type="number" class="form-control input-small inline-block" id="bu5_p" placeholder="0">
-          <input type="text" class="form-control inline-block" id="bu5_c" placeholder="Kommentaar">
-        </div>
-
-        <div class="form-group">
-          <div class="inline-block"><div>Kasutaja tähelepanu juhitakse animatsioonidega</div></div>
-          <input type="number" class="form-control input-small inline-block" id="bu6_p" placeholder="0">
-          <input type="text" class="form-control inline-block" id="bu6_c" placeholder="Kommentaar">
-        </div>
-      </div>
-
-      <div id="extra-points">
-        <h1>Lisaülesanded</h1>
-
-        <div class="form-group">
-          <div class="inline-block">Ilus kujundus</div>
-          <input type="checkbox" class="form-control inline-block" id="lu1">
-        </div>
-
-        <div class="form-group">
-          <div class="inline-block">Mängu kujundus toetab teemat</div>
-          <input type="checkbox" class="form-control inline-block" id="lu2">
-        </div>
-
-        <div class="form-group">
-          <div class="inline-block">Head ilmumised</div>
-          <input type="checkbox" class="form-control inline-block" id="lu3">
-        </div>
-
-        <div class="form-group">
-          <div class="inline-block">Hea sortimise tagasiside</div>
-          <input type="checkbox" class="form-control inline-block" id="lu4">
-        </div>
-
-        <div class="form-group">
-          <div class="inline-block">Hea lisaülesande "episood"</div>
-          <input type="checkbox" class="form-control inline-block" id="lu5">
-        </div>
-
-        <div class="form-group">
-          <div class="inline-block">Hea läbikukkumiste tagasiside</div>
-          <input type="checkbox" class="form-control inline-block" id="lu6">
-        </div>
-
-        <div class="form-group">
-          <div class="inline-block">Heliline tagasiside</div>
-          <input type="checkbox" class="form-control inline-block" id="lu7">
-        </div>
-
-        <div class="form-group">
-          <div class="inline-block">Mängu õpitavus on hea</div>
-          <input type="checkbox" class="form-control inline-block" id="lu8">
-        </div>
-
-        <div class="form-group">
-          <div class="inline-block">Sorditavaid objekte saab lohistada (drag&drop)</div>
-          <input type="checkbox" class="form-control inline-block" id="lu9">
-        </div>
-
-        <div class="form-group">
-          <div class="inline-block">Töötab ka mobiilil</div>
-          <input type="checkbox" class="form-control inline-block" id="lu10">
-        </div>
-      </div>
-
-      <div id="additional-points">
-        <h1>Täiendavad andmed</h1>
-
-        <div class="form-group">
-          <div class="inline-block"><div>Lisapunktid</div></div>
-          <input type="number" class="form-control input-small inline-block" id="extra_p" placeholder="0">
-          <input type="text" class="form-control inline-block" id="extra_c" placeholder="Kommentaar">
-        </div>
-
-        <div class="form-group">
-          <div class="inline-block"><div>Hilinemine</div></div>
-          <input type="number" class="form-control input-small inline-block" id="late_p" placeholder="0">
-          <input type="text" class="form-control inline-block" id="late_c" placeholder="Kommentaar">
-        </div>
-
-        <div class="form-group">
-          <div class="inline-block">Plagiaat</div>
-          <input type="checkbox" class="form-control inline-block" id="plag_p">
-          <input type="text" class="form-control inline-block" id="plag_c" placeholder="Lahendus">
-        </div>
-      </div>
-
-      <table id="summary-table">
+    <div v-if="this.tab === 2" class="container" id="container">
+      <table>
+        <thead>
+        <tr>
+          <th>Tudeng 1</th>
+          <th>Tudeng 2</th>
+          <th>Töö aadress</th>
+        </tr>
+        </thead>
         <tbody>
-          <tr>
-            <td>Baasülesanne</td>
-            <td id="bu-total">7</td>
-          </tr>
-          <tr>
-            <td>Lisaülesanded</td>
-            <td id="lu-total">10</td>
-          </tr>
-          <tr>
-            <td>Lisapunktid</td>
-            <td id="extra-p">2</td>
-          </tr>
-          <tr>
-            <td>Hilinemine</td>
-            <td id="late-p">-2</td>
-          </tr>
-          <tr>
-            <td>Kokku</td>
-            <td id="total">17</td>
-          </tr>
+        <tr v-for="work in works">
+          <td>
+            <span v-if="work.student1_id">{{ this.students.filter(x => x.id === work.student1_id)[0].name }}</span>
+          </td>
+          <td>
+            <span v-if="work.student2_id">{{ this.students.filter(x => x.id === work.student2_id)[0].name }}</span>
+          </td>
+          <td>
+            <a :href="work.url">{{ work.url }}</a>
+          </td>
+
+          <td>
+            <button class="btn btn-success" v-on:click="setWorkId(work.id)">Vaata</button>
+          </td>
+        </tr>
         </tbody>
       </table>
-
-      <div id="checkboxes-wrapper">
-        <div class="form-group">
-          <div class="inline-block">Arvestatud</div>
-          <input type="checkbox" class="form-control inline-block" id="done">
-        </div>
-
-        <div class="form-group">
-          <div class="inline-block">Märkimisväärne töö</div>
-          <input type="checkbox" class="form-control inline-block" id="cool">
-        </div>
-      </div>
-
-      <button class="btn btn-light">Tagasi</button>
-      <button class="btn btn-lg btn-success" id="submit">Salvesta</button>
-
     </div>
+  </div>
+
+    <script>
+      var vm = new Vue({
+        el: "#main-container",
+        data: {
+          tab: 2,
+          work: null,
+          student1: {'name': '', 'student_code': ''},
+          student2: {'name': '', 'student_code': ''},
+          works: [],
+          students: []
+        },
+
+        methods: {
+          setWorkId(workId) {
+            this.tab = 1;
+            this.work = this.works.filter(x => x.id === workId)[0];
+            var a = this.students.filter(x => x.id === this.work.student1_id)[0];
+            this.student1 = {'name': a.name, 'student_code': a.student_code};
+            var b = this.students.filter(x => x.id === this.work.student1_id)[0];
+            this.student2 = {'name': b.name, 'student_code': b.student_code};
+          }
+        },
+
+        mounted() {
+          axios.get('get.php?tableName=ui_t3_142766_work').then(response => {
+            // console.log(response.data);
+            this.works = [{"id":"1","due_date":"02.05.2018","student1_id":"4","student2_id":"1","url":"test.ee","bu1_p":"1","bu1_c":"a","bu2_p":"1","bu2_c":"","bu3_p":"0","bu3_c":"","bu4_p":"0","bu4_c":"","bu5_p":"0","bu5_c":"","bu6_p":"0","bu6_c":"","lu1":"0","lu2":"0","lu3":"0","lu4":"0","lu5":"0","lu6":"0","lu7":"0","lu8":"0","lu9":"0","lu10":"0","extra_p":"1","extra_c":"a","late_p":"0","late_c":"","plag_p":"0","plag_c":"","done":"0","cool":"0"}]
+          });
+          axios.get('get.php?tableName=ui_t3_142766_students').then(res => {
+            this.students = [{"id":"1","student_code":"112233IAPB","name":"Kaire Kaalikas","student_group":"K16"},{"id":"2","student_code":"070707IAPB","name":"Peeter Paun","student_group":"K12"},{"id":"3","student_code":"080808IAPB","name":"Robin Kuur","student_group":"K12"},{"id":"4","student_code":"142766IAPB","name":"Kert Ojasaar","student_group":"K16"},{"id":"5","student_code":"123123IAPB","name":"test","student_group":"K14"},{"id":"6","student_code":"111111IAPB","name":"test","student_group":"K12"},{"id":"7","student_code":"111111IAPB","name":"test123","student_group":"K12"},{"id":"8","student_code":"000000IAPB","name":"Testija Test","student_group":"K12"},{"id":"9","student_code":"000000IAPB","name":"Testija Test","student_group":"K12"},{"id":"10","student_code":"","name":"","student_group":""}];
+          });
+        }
+      });
+    </script>
   </body>
 </html>

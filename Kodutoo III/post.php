@@ -13,7 +13,7 @@
 
   $db = mysqli_select_db($connection, "st2014");
 
-    if (isset($_POST["due_date"])) {
+//    if (isset($_POST["due_date"])) {
       $due_date = $_POST['due_date'];
       $student1_id = $_POST['student1_id'];
       $student2_id = $_POST['student2_id'];
@@ -48,14 +48,14 @@
       $plag_c = $_POST['plag_c'];
       $done = $_POST['done'];
       $cool = $_POST['cool'];
-      mysqli_query($connection, "INSERT INTO ui_t3_142766_work (due_date, student1_id, student2_id, url, " +
-          + "bu1_p, bu1_c, bu2_p, bu2_c, bu3_p, bu3_c, bu4_p, bu4_c, bu4_p, bu5_c, bu6_p, bu6_c, " +
-          + "lu1, lu2, lu3, lu4, lu5, lu6, lu7, lu8, lu9, lu10, extra_p, extra_c, late_p, late_c, plag_p, plag_c, done, cool) " +
-          + " VALUES ('$due_date', '$student1_id', '$student2_id', '$url', " +
-          + "'$bu1_p', '$bu1_c', '$bu2_p', '$bu2_c', '$bu3_p', '$bu3_c', '$bu4_p', '$bu4_c', '$bu4_p', '$bu5_c', " +
-          + "'$bu6_p', '$bu6_c', '$lu1', '$lu2', '$lu3', '$lu4', '$lu5', '$lu6', '$lu7', '$lu8', '$lu9', '$lu10', " +
-          + "'$extra_p', '$extra_c', '$late_p', '$late_c', '$plag_p', '$plag_c', '$done', '$cool')");
-    } else {
+      echo 'lu1: ' . $lu1;
+      $res = mysqli_query($connection, "INSERT INTO ui_t3_142766_work (due_date, student1_id, student2_id, url, bu1_p, bu1_c, bu2_p, bu2_c, bu3_p, bu3_c, bu4_p, bu4_c, bu5_p, bu5_c, bu6_p, bu6_c, lu1, lu2, lu3, lu4, lu5, lu6, lu7, lu8, lu9, lu10, extra_p, extra_c, late_p, late_c, plag_p, plag_c, done, cool) VALUES ('$due_date', '$student1_id', '$student2_id', '$url', '$bu1_p', '$bu1_c', '$bu2_p', '$bu2_c', '$bu3_p', '$bu3_c', '$bu4_p', '$bu4_c', '$bu4_p', '$bu5_c', '$bu6_p', '$bu6_c', '$lu1', '$lu2', '$lu3', '$lu4', '$lu5', '$lu6', '$lu7', '$lu8', '$lu9', '$lu10', '$extra_p', '$extra_c', '$late_p', '$late_c', '$plag_p', '$plag_c', '$done', '$cool')");
+      if ($res) {
+          echo 'RES:' . $res;
+        } else {
+          echo 'ERROR' . mysqli_error($connection);
+        }
+    /*} else {
       $student_code = $_POST['student_code'];
       $name = $_POST['name'];
       $student_group = $_POST['student_group'];
@@ -67,5 +67,5 @@
       } else {
         echo 'ERROR' . mysqli_error($connection);
       }
-  }
+  }*/
 ?>
