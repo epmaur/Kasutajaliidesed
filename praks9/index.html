@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Vaata, alkeemikud!</title>
+        <script src="vue.js"></script>
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <div id="alchemists">
+           <ul>
+              <li><a @click= "changeTabs(0)" href="#" >Vaata kõiki alkeemikuid</a></li>
+              <li><a @click= "changeTabs(1)" href="#">Lisa</a></li>
+            </ul>
+            <div v-if="tab == 0">
+                <span class="title">Alkeemikute nimekiri</span>
+                <table>
+                    <tr>
+                        <th>Nimi</th>
+                        <th>Lemmikelement</th>
+                    </tr>
+                    <tr v-for="alchemist in alchemists">
+                        <th>{{alchemist.name}}</th>
+                        <th>{{alchemist.element}}</th>
+                    </tr>
+                </table>
+            </div>
+            <div v-if="tab == 1">
+                <span class="title">Lisa uus alkeemik</span>
+                <div class="form">
+                    <input type="text" placeholder="Alkeemiku nimi" v-model="newName"><br>
+                    <input type="text" placeholder="Alkeemiku lemmikelement" v-model="newElement"><br>
+                    <input type="submit" value="Lisa" @click="addAlchemist">
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            var vm = new Vue({
+                el: "#alchemists",
+                data: {
+                    tab: 0,
+                    alchemists: [
+                        {id: 0, name: "Hermes Trismegistus", element: "Earth"},
+                        {id: 1, name: "Ostanes", element: "Fire"},
+                        {id: 2, name: "Nicolas Flamel", element: "Air"},
+                        {id: 3, name: "Perenelle Flame", element: "Water"}
+                    ],
+                    newName: "",
+                    newElement: "",
+                    newId: 3
+                    
+                },
+                methods: {
+                    changeTabs: function(tab) {
+                        this.tab = tab;
+                    },
+                    addAlchemist: function() {
+                        this.newId = this.newId + 1;
+                        this.alchemists.push({id: this.newId, name: this.newName, element: this.newElement});
+                        this.newName = "";
+                        this.newElement = "";
+
+                    
+                    }
+                }
+
+            });
+
+        </script>
+    </body>
+</html>

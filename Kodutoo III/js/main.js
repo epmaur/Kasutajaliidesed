@@ -11,13 +11,58 @@ $(document).ready(function() {
   // getFromDb(WORK_TABLE_NAME);
 
   $('#submit').click(function() {
-    console.log('student1_code:', $('#student1_code').val());
     const student1 = students.filter(x => x.student_code === $('#student1_code').val())[0];
+    const student2 = students.filter(x => x.student_code === $('#student2_code').val())[0];
     console.log('student1:', student1);
     const data = {
-      'tableName': STUDENTS_TABLE_NAME,
-      'due_date': $('').val()
+      'tableName': WORK_TABLE_NAME,
+      'due_date': $('').val(),
+      'student1_id': student1.id,
+      'student2_id': student2.id,
+      'url': $('#url').val(),
+      'bu1_p': $('#bu1_p').val(),
+      'bu1_c': $('#bu1_c').val(),
+      'bu2_p': $('#bu2_p').val(),
+      'bu2_c': $('#bu2_c').val(),
+      'bu3_p': $('#bu3_p').val(),
+      'bu3_c': $('#bu3_c').val(),
+      'bu4_p': $('#bu4_p').val(),
+      'bu4_c': $('#bu4_c').val(),
+      'bu5_p': $('#bu5_p').val(),
+      'bu5_c': $('#bu5_c').val(),
+      'bu6_p': $('#bu6_p').val(),
+      'bu6_c': $('#bu6_c').val(),
+      'lu1': $('#lu1').val(),
+      'lu2': $('#lu2').val(),
+      'lu3': $('#lu3').val(),
+      'lu4': $('#lu4').val(),
+      'lu5': $('#lu5').val(),
+      'lu6': $('#lu6').val(),
+      'lu7': $('#lu7').val(),
+      'lu8': $('#lu8').val(),
+      'lu9': $('#lu9').val(),
+      'lu10': $('#lu10').val(),
+      'extra_p': $('#extra-p').val(),
+      'extra_c': $('#extra_c').val(),
+      'late_p': $('#late_p').val(),
+      'late_c': $('#late_c').val(),
+      'plag_p': $('#plag_p').val(),
+      'plag_c': $('#plag_c').val(),
+      'done': $('#done').val(),
+      'cool': $('#cool').val()
     };
+    $.ajax({
+      url: 'post.php',
+      type: 'POST',
+      data: data,
+      dataType: 'json',
+      success: function(data) {
+        console.log('success data:', data)
+      }
+    });
+    setTimeout(function () {
+      getFromDb(WORK_TABLE_NAME);
+    }, 3000);
   });
 });
 
@@ -31,7 +76,9 @@ function getFromDb(tableName) {
     dataType: 'json',
     success: function(data) {
       console.log('success data:', data);
-      students = data;
+      if (tableName === STUDENTS_TABLE_NAME) {
+        students = data;
+      }
     }
   });
 }
