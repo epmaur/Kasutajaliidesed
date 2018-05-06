@@ -47,20 +47,13 @@ input.input-small {
   /*border-radius: 3px;*/
 }
 
-th, td {
-  border: 1px solid black;
-}
+
 #summary-table td {
   padding: 5px;
 }
 
-#container table {
-  margin: 0 auto;
-}
-#container table th,
-#container table td {
-  padding: 5px;
-}
+/*
 #container table td:last-child {
   border: 0;
 }
+*/
