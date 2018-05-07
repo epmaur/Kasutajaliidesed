@@ -8,6 +8,13 @@ const bu_inputs =['#bu1_p','#bu2_p','#bu3_p', '#bu4_p', '#bu5_p', '#bu6_p'];
 
 
 $(document).ready(function() {
+  checkDueDate();
+
+  $('#extend').click(function() {
+    extendDueDate()
+  });
+
+  updateSummaryTable('');
 
   $.each(lu_inputs, function( index, value ) {
     $(value).bind( "click", function() {
@@ -33,12 +40,6 @@ $(document).ready(function() {
     updateSummaryTable('');
   });
 
-  var dueDate = $('#due-date').html();
-  var fullDate = new Date();
-  var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
-  var twoDigitDay = ((fullDate.getDate().length) === 1)? (fullDate.getDate()) : '0' + (fullDate.getDate());
-  var currentDate = twoDigitDay + "." + twoDigitMonth + "." + fullDate.getFullYear();
-  console.log('current date', currentDate);
 
   var studentNames = [];
   var studentCodes = [];
@@ -254,10 +255,11 @@ function updateSummaryTable(field) {
   } else if (field === 'extra_p') {
     var val = $('#extra_p').val() === '' ? 0: parseInt($('#extra_p').val());
     $('#extra-p').html(val);
-  } else if (field === 'late_p') {
-    var val = $('#late_p').val() === '' ? 0: parseInt($('#late_p').val());
-    $('#late-p').html(val);
   }
+
+  var val = $('#late_p').val() === '' ? 0: parseInt($('#late_p').val());
+  $('#late-p').html(val);
+
   var sum = parseInt($('#lu-total').html()) + parseInt($('#bu-total').html()) + parseInt($('#extra-p').html()) + parseInt($('#late-p').html());
   $('#total').html(sum);
 
@@ -271,6 +273,42 @@ function updateSummaryTable(field) {
 
   }
 }
+
+function checkDueDate() {
+  var dueDate = $('#due-date').html().split('.');
+  var formattedDueDate = dueDate[2] + "/" + dueDate[1] + "/" + dueDate[0];
+
+  var d1 = Date.parse(formattedDueDate);
+  var d2 = Date.parse(formatDate(new Date, '/'));
+
+  if (d2 > d1) {
+    $('#late_p').val(-5);
+    $('#due-date').addClass('overdue');
+
+  } else {
+    $('#due-date').removeClass('overdue');
+  }
+}
+
+function extendDueDate() {
+  var currentDate = Date.parse(formatDate(new Date, '/'));
+  var date = new Date(currentDate);
+  date.setDate(date.getDate() + 7);
+  $('#due-date').html(formatDate(date, '.'));
+  checkDueDate();
+}
+
+function formatDate(currentDate, delimiter) {
+  var twoDigitMonth = ((currentDate.getMonth() + 1 >= 10)) ? (currentDate.getMonth() + 1) : '0' + (currentDate.getMonth() + 1);
+  var twoDigitDay = ((currentDate.getDate()) >= 10)? (currentDate.getDate()) : '0' + (currentDate.getDate());
+  if (delimiter === '/') {
+    return currentDate.getFullYear() + delimiter + twoDigitMonth + delimiter + twoDigitDay;
+  } else {
+    return twoDigitDay + delimiter + twoDigitMonth + delimiter + currentDate.getFullYear();
+  }
+}
+
+
 
 
 
