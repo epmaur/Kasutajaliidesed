@@ -1,9 +1,9 @@
 TODO INDEX
 * Väljade valideerimine
-* Tudengite autocomplete
-* "Pikenda"
+* Tudengite autocomplete --> done
+* "Pikenda" ---> done
 * responsive
-* Punktitabel
+* Punktitabel --> done
 * input type=number tuleb asendada type=text + validaator
 * URL autocomplete dijkstra
 
