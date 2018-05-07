@@ -24,60 +24,72 @@
         <div>
           <div class="form-group inline-block">
             <div class="label">Nimi</div>
-            <input v-if="this.work" type="text" class="form-control" id="student1_name" placeholder="Tudeng #1" v-model="this.work.student1.name">
-            <input v-else type="text" class="form-control" id="student1_name" placeholder="Tudeng #1">
-            <input v-if="this.work" type="text" class="form-control" id="student2_name" placeholder="Tudeng #2" v-model="this.work.student2.name">
-            <input v-else type="text" class="form-control" id="student2_name" placeholder="Tudeng #2">
+            <div class="form-group">
+              <input v-if="this.work" type="text" class="form-control name-input" id="student1_name" placeholder="Tudeng #1"
+                    v-model="this.work.student1.name">
+              <input v-else type="text" class="form-control name-input" id="student1_name" placeholder="Tudeng #1">
+            </div>
+            <div class="form-group">
+              <input v-if="this.work" type="text" class="form-control name-input" id="student2_name" placeholder="Tudeng #2"
+                     v-model="this.work.student2.name">
+              <input v-else type="text" class="form-control name-input" id="student2_name" placeholder="Tudeng #2">
+            </div>
           </div>
 
           <div class="form-group inline-block">
             <div class="label">Kood</div>
-            <input v-if="this.work" type="text" class="form-control" id="student1_code" placeholder="Tudeng #1" v-model="this.work.student1.student_code">
-            <input v-else type="text" class="form-control" id="student1_code" placeholder="Tudeng #1">
-            <input v-if="this.work" type="text" class="form-control" id="student2_code" placeholder="Tudeng #1" v-model="this.work.student2.student_code">
-            <input v-else type="text" class="form-control" id="student2_code" placeholder="Tudeng #2">
+            <div class="form-group">
+              <input v-if="this.work" type="text" class="form-control code-input" id="student1_code" placeholder="Tudeng #1" v-model="this.work.student1.student_code">
+              <input v-else type="text" class="form-control code-input" id="student1_code" placeholder="123456IAPB">
+            </div>
+            <div class="form-group">
+              <input v-if="this.work" type="text" class="form-control code-input" id="student2_code" placeholder="Tudeng #1" v-model="this.work.student2.student_code">
+              <input v-else type="text" class="form-control code-input" id="student2_code" placeholder="654321IAPB">
+            </div>
           </div>
         </div>
 
-        <div>Töö aadress</div>
-        <input type="url" class="form-control input-long" id="url" placeholder="URL">
+        <div class="form-group">
+          <div>Töö aadress</div>
+          <input type="url" class="form-control input-long" id="url" placeholder="URL">
+        </div>
 
         <div id="base-points">
           <h1>Baasülesanne</h1>
 
           <div class="form-group">
             <div class="inline-block"><div>Ootejärjekord</div></div>
-            <input type="number" class="form-control input-small inline-block" id="bu1_p" placeholder="0">
+            <input type="text" class="form-control input-small inline-block nr-input" id="bu1_p" placeholder="0">
             <input type="text" class="form-control inline-block" id="bu1_c" placeholder="Kommentaar">
           </div>
 
           <div class="form-group">
             <div class="inline-block"><div>Sortimine</div></div>
-            <input type="number" class="form-control input-small inline-block" id="bu2_p" placeholder="0">
+            <input type="text" class="form-control input-small inline-block nr-input" id="bu2_p" placeholder="0">
             <input type="text" class="form-control inline-block" id="bu2_c" placeholder="Kommentaar">
           </div>
 
           <div class="form-group">
             <div class="inline-block"><div>Tähtajaline lisaülesanne</div></div>
-            <input type="number" class="form-control input-small inline-block" id="bu3_p" placeholder="0">
+            <input type="text" class="form-control input-small inline-block nr-input" id="bu3_p" placeholder="0">
             <input type="text" class="form-control inline-block" id="bu3_c" placeholder="Kommentaar">
           </div>
 
           <div class="form-group">
             <div class="inline-block"><div>Elude kaotamine</div></div>
-            <input type="number" class="form-control input-small inline-block" id="bu4_p" placeholder="0">
+            <input type="text" class="form-control input-small inline-block nr-input" id="bu4_p" placeholder="0">
             <input type="text" class="form-control inline-block" id="bu4_c" placeholder="Kommentaar">
           </div>
 
           <div class="form-group">
             <div class="inline-block"><div>Mängu läbikukkumine, punktid ja kordamine</div></div>
-            <input type="number" class="form-control input-small inline-block" id="bu5_p" placeholder="0">
+            <input type="text" class="form-control input-small inline-block nr-input" id="bu5_p" placeholder="0">
             <input type="text" class="form-control inline-block" id="bu5_c" placeholder="Kommentaar">
           </div>
 
           <div class="form-group">
             <div class="inline-block"><div>Kasutaja tähelepanu juhitakse animatsioonidega</div></div>
-            <input type="number" class="form-control input-small inline-block" id="bu6_p" placeholder="0">
+            <input type="text" class="form-control input-small inline-block nr-input" id="bu6_p" placeholder="0">
             <input type="text" class="form-control inline-block" id="bu6_c" placeholder="Kommentaar">
           </div>
         </div>
@@ -87,52 +99,82 @@
 
           <div class="form-group">
             <div class="inline-block">Ilus kujundus</div>
-            <input type="checkbox" class="form-control inline-block" id="lu1">
+            <label class="cbox-container">
+              <input type="checkbox" class="form-control inline-block" id="lu1">
+              <span class="checkmark"></span>
+            </label>
           </div>
 
           <div class="form-group">
             <div class="inline-block">Mängu kujundus toetab teemat</div>
-            <input type="checkbox" class="form-control inline-block" id="lu2">
+            <label class="cbox-container">
+              <input type="checkbox" class="form-control inline-block" id="lu2">
+              <span class="checkmark"></span>
+            </label>
           </div>
 
           <div class="form-group">
             <div class="inline-block">Head ilmumised</div>
-            <input type="checkbox" class="form-control inline-block" id="lu3">
+            <label class="cbox-container">
+              <input type="checkbox" class="form-control inline-block" id="lu3">
+              <span class="checkmark"></span>
+            </label>
           </div>
 
           <div class="form-group">
             <div class="inline-block">Hea sortimise tagasiside</div>
-            <input type="checkbox" class="form-control inline-block" id="lu4">
+            <label class="cbox-container">
+              <input type="checkbox" class="form-control inline-block" id="lu4">
+              <span class="checkmark"></span>
+            </label>
           </div>
 
           <div class="form-group">
             <div class="inline-block">Hea lisaülesande "episood"</div>
-            <input type="checkbox" class="form-control inline-block" id="lu5">
+            <label class="cbox-container">
+              <input type="checkbox" class="form-control inline-block" id="lu5">
+              <span class="checkmark"></span>
+            </label>
           </div>
 
           <div class="form-group">
             <div class="inline-block">Hea läbikukkumiste tagasiside</div>
-            <input type="checkbox" class="form-control inline-block" id="lu6">
+            <label class="cbox-container">
+              <input type="checkbox" class="form-control inline-block" id="lu6">
+              <span class="checkmark"></span>
+            </label>
           </div>
 
           <div class="form-group">
             <div class="inline-block">Heliline tagasiside</div>
-            <input type="checkbox" class="form-control inline-block" id="lu7">
+            <label class="cbox-container">
+              <input type="checkbox" class="form-control inline-block" id="lu7">
+              <span class="checkmark"></span>
+            </label>
           </div>
 
           <div class="form-group">
             <div class="inline-block">Mängu õpitavus on hea</div>
-            <input type="checkbox" class="form-control inline-block" id="lu8">
+            <label class="cbox-container">
+              <input type="checkbox" class="form-control inline-block" id="lu8">
+              <span class="checkmark"></span>
+            </label>
           </div>
 
           <div class="form-group">
             <div class="inline-block">Sorditavaid objekte saab lohistada (drag&drop)</div>
-            <input type="checkbox" class="form-control inline-block" id="lu9">
+            <label class="cbox-container">
+              <input type="checkbox" class="form-control inline-block" id="lu9">
+              <span class="checkmark"></span>
+            </label>
           </div>
 
           <div class="form-group">
             <div class="inline-block">Töötab ka mobiilil</div>
-            <input type="checkbox" class="form-control inline-block" id="lu10">
+            <label class="cbox-container">
+              <input type="checkbox" class="form-control inline-block" id="lu10">
+              <span class="checkmark"></span>
+            </label>
           </div>
         </div>
 
@@ -141,19 +183,22 @@
 
           <div class="form-group">
             <div class="inline-block"><div>Lisapunktid</div></div>
-            <input type="number" class="form-control input-small inline-block" id="extra_p" placeholder="0">
+            <input type="text" class="form-control input-small inline-block nr-input" id="extra_p" placeholder="0">
             <input type="text" class="form-control inline-block" id="extra_c" placeholder="Kommentaar">
           </div>
 
           <div class="form-group">
             <div class="inline-block"><div>Hilinemine</div></div>
-            <input type="number" class="form-control input-small inline-block" id="late_p" placeholder="0">
+            <input type="text" class="form-control input-small inline-block nr-input" id="late_p" placeholder="0">
             <input type="text" class="form-control inline-block" id="late_c" placeholder="Kommentaar">
           </div>
 
           <div class="form-group">
             <div class="inline-block">Plagiaat</div>
-            <input type="checkbox" class="form-control inline-block" id="plag_p">
+            <label class="cbox-container">
+              <input type="checkbox" class="form-control inline-block" id="plag_p">
+              <span class="checkmark"></span>
+            </label>
             <input type="text" class="form-control inline-block" id="plag_c" placeholder="Lahendus">
           </div>
         </div>
@@ -186,12 +231,18 @@
         <div id="checkboxes-wrapper">
           <div class="form-group">
             <div class="inline-block">Arvestatud</div>
-            <input type="checkbox" class="form-control inline-block" id="done">
+            <label class="cbox-container">
+              <input type="checkbox" class="form-control inline-block" id="done">
+              <span class="checkmark"></span>
+            </label>
           </div>
 
           <div class="form-group">
             <div class="inline-block">Märkimisväärne töö</div>
-            <input type="checkbox" class="form-control inline-block" id="cool">
+            <label class="cbox-container">
+              <input type="checkbox" class="form-control inline-block" id="cool">
+              <span class="checkmark"></span>
+            </label>
           </div>
         </div>
 
@@ -236,7 +287,7 @@
       var vm = new Vue({
         el: "#main-container",
         data: {
-          tab: 2,
+          tab: 1,
           work: null,
           student1: {'name': '', 'student_code': ''},
           student2: {'name': '', 'student_code': ''},

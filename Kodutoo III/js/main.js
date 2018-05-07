@@ -64,6 +64,57 @@ $(document).ready(function() {
       getFromDb(WORK_TABLE_NAME);
     }, 3000);
   });
+
+  $('.nr-input').keydown(function (e) {
+    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+        (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+        (e.keyCode >= 35 && e.keyCode <= 40)) {
+      return;
+    }
+    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+      e.preventDefault();
+    }
+  });
+  $(document).on('keyup', '.nr-input', function() {
+    const parent = $(this).parent();
+    if (parseInt($(this).val())) {
+      success(parent);
+    } else {
+      fail(parent);
+    }
+  });
+  $(document).on('keyup', '.name-input', function() {
+    const parent = $(this).parent();
+    if ($(this).val().length > 0) {
+      if (/^[a-zA-ZõäöüÕÄÖÜ\s-]+$/.test($(this).val())) {
+        success(parent);
+      }
+      else {
+        fail(parent, 'Nimi peab koosnema vaid tähtedest');
+      }
+    } else {
+      fail(parent, 'Pikkus peab olema vähemalt 1 tähemärk');
+    }
+  });
+  /*$(document).on('keyup', 'input[type="url"]', function() {
+    if (/^[a-zA-Z\-]{2, 256}\.[a-zA-Z]$/.test($(this).val())) {
+      success($(this).parent());
+    } else {
+      fail($(this).parent());
+    }
+  });*/
+  $(document).on('keyup', '.code-input', function() {
+    const parent = $(this).parent();
+    if ($(this).val().length > 0) {
+      if (/^[0-9]{6}[a-zA-Z]{4}$/.test($(this).val())) {
+        success(parent);
+      } else {
+        fail(parent, 'Pole korrektne tudengikood');
+      }
+    } else {
+      fail(parent, 'Pikkus peab olema vähemalt 1 tähemärk');
+    }
+  });
 });
 
 function getFromDb(tableName) {
@@ -98,4 +149,20 @@ function postToDb(tableName) {
       console.log('success data:', data)
     }
   });
+}
+
+function fail(parent, title) {
+  $(parent).removeClass('has-success');
+  $(parent).addClass('has-warning');
+  $(parent).tooltip('destroy');
+  $(parent).tooltip({'trigger': 'hover', 'title': title, 'placement': 'right'});
+  $(parent).append('<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>');
+
+}
+
+function success(parent) {
+  $(parent).removeClass('has-warning');
+  $(parent).addClass('has-success');
+  $(parent).tooltip('destroy');
+  $(parent).append('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
 }
