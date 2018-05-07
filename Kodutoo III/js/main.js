@@ -3,12 +3,79 @@ const WORK_TABLE_NAME = 'ui_t3_142766_work';
 var students = [{"id":"1","student_code":"112233IAPB","name":"Kaire Kaalikas","student_group":"K16"},{"id":"2","student_code":"070707IAPB","name":"Peeter Paun","student_group":"K12"},{"id":"3","student_code":"080808IAPB","name":"Robin Kuur","student_group":"K12"},{"id":"4","student_code":"142766IAPB","name":"Kert Ojasaar","student_group":"K16"},{"id":"5","student_code":"123123IAPB","name":"test","student_group":"K14"},{"id":"6","student_code":"111111IAPB","name":"test","student_group":"K12"},{"id":"7","student_code":"111111IAPB","name":"test123","student_group":"K12"},{"id":"8","student_code":"000000IAPB","name":"Testija Test","student_group":"K12"},{"id":"9","student_code":"000000IAPB","name":"Testija Test","student_group":"K12"}];
 // getFromDb(STUDENTS_TABLE_NAME);
 console.log('students:', students);
+const lu_inputs = ['#lu1', '#lu2', '#lu3', '#lu4', '#lu5', '#lu6', '#lu7', '#lu8', '#lu9', '#lu10'];
+const bu_inputs =['#bu1_p','#bu2_p','#bu3_p', '#bu4_p', '#bu5_p', '#bu6_p'];
+
 
 $(document).ready(function() {
-  // console.log('ready');
-  // postToDb(STUDENTS_TABLE_NAME);
 
-  // getFromDb(WORK_TABLE_NAME);
+  $.each(lu_inputs, function( index, value ) {
+    $(value).bind( "click", function() {
+      updateSummaryTable('lu');
+    });
+  });
+
+  $.each(bu_inputs, function( index, value ) {
+    $(value).change(function() {
+      updateSummaryTable('bu');
+    });
+  });
+
+  $('#extra_p').change(function() {
+    updateSummaryTable('extra_p');
+  });
+
+  $('#late_p').change(function() {
+    updateSummaryTable('late_p');
+  });
+
+  $('#plag_p').change(function () {
+    updateSummaryTable('');
+  });
+
+  var dueDate = $('#due-date').html();
+  var fullDate = new Date();
+  var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
+  var twoDigitDay = ((fullDate.getDate().length) === 1)? (fullDate.getDate()) : '0' + (fullDate.getDate());
+  var currentDate = twoDigitDay + "." + twoDigitMonth + "." + fullDate.getFullYear();
+  console.log('current date', currentDate);
+
+  var studentNames = [];
+  var studentCodes = [];
+  $.each(students, function (index, value) {
+    studentNames.push(value.name);
+    studentCodes.push(value.student_code);
+  });
+
+  $('#student1_name').autocomplete({
+    source: studentNames,
+    select: function( event, ui ) {
+      var studentCode = students.filter(x => x.name === ui.item.value)[0].student_code;
+      $('#student1_code').val(studentCode);
+    }
+  });
+  $('#student2_name').autocomplete({
+    source: studentNames,
+    select: function( event, ui ) {
+      var studentCode = students.filter(x => x.name === ui.item.value)[0].student_code;
+      $('#student2_code').val(studentCode);
+    }
+  });
+  $('#student1_code').autocomplete({
+    source: studentCodes,
+    select: function( event, ui ) {
+      var studentName = students.filter(x => x.student_code === ui.item.value)[0].name;
+      $('#student1_name').val(studentName);
+    }
+  });
+  $('#student2_code').autocomplete({
+    source: studentCodes,
+    select: function( event, ui ) {
+      var studentName = students.filter(x => x.student_code === ui.item.value)[0].name;
+      $('#student2_name').val(studentName);
+    }
+  });
+
 
   $('#submit').click(function() {
     const student1 = students.filter(x => x.student_code === $('#student1_code').val())[0];
@@ -154,8 +221,8 @@ function postToDb(tableName) {
 function fail(parent, title) {
   $(parent).removeClass('has-success');
   $(parent).addClass('has-warning');
-  $(parent).tooltip('destroy');
-  $(parent).tooltip({'trigger': 'hover', 'title': title, 'placement': 'right'});
+  //$(parent).tooltip('destroy');
+  //$(parent).tooltip({'trigger': 'hover', 'title': title, 'placement': 'right'});
   $(parent).append('<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>');
 
 }
@@ -163,6 +230,48 @@ function fail(parent, title) {
 function success(parent) {
   $(parent).removeClass('has-warning');
   $(parent).addClass('has-success');
-  $(parent).tooltip('destroy');
+  //$(parent).tooltip('destroy');
   $(parent).append('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
 }
+
+function updateSummaryTable(field) {
+  if (field === 'lu') {
+    var lu_points = 0;
+    $.each(lu_inputs, function (index, value) {
+      if ($(value).is(":checked")) {
+        lu_points++;
+      }
+    });
+    $('#lu-total').html(lu_points);
+  } else if (field === 'bu') {
+    var bu_points = 0;
+    $.each(bu_inputs, function( index, value ) {
+      var val = $(value).val() === '' ? 0: parseInt($(value).val());
+      bu_points = bu_points + val;
+    });
+    console.log(bu_points);
+    $('#bu-total').html(bu_points);
+  } else if (field === 'extra_p') {
+    var val = $('#extra_p').val() === '' ? 0: parseInt($('#extra_p').val());
+    $('#extra-p').html(val);
+  } else if (field === 'late_p') {
+    var val = $('#late_p').val() === '' ? 0: parseInt($('#late_p').val());
+    $('#late-p').html(val);
+  }
+  var sum = parseInt($('#lu-total').html()) + parseInt($('#bu-total').html()) + parseInt($('#extra-p').html()) + parseInt($('#late-p').html());
+  $('#total').html(sum);
+
+  if (bu_points === 10) {
+    $('#done').attr('checked','checked');
+  } else {
+    $('#done').removeAttr('checked');
+  }
+  if ($('#plag_p').is('checked')) {
+    $('#done').removeAttr('checked');
+
+  }
+}
+
+
+
+
