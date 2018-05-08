@@ -40,6 +40,21 @@ $(document).ready(function() {
     updateSummaryTable('');
   });
 
+  $(document).click(function(evt) {
+    var myTooltip = null;
+    if ($(evt.target).hasClass('form-group') && $(evt.target).next().hasClass('tooltip')) {
+      myTooltip = $(evt.target).next().attr('id');
+    }
+    if ($(evt.target).hasClass('form-control') && $(evt.target).parent().next().hasClass('tooltip')) {
+      myTooltip = $(evt.target).parent().next().attr('id');
+    }
+    Array.prototype.forEach.call($('.tooltip'), function(tooltip) {
+      if ($(tooltip).attr('id') !== myTooltip) {
+        $(tooltip).remove();
+      }
+    });
+  });
+
 
   var studentNames = [];
   var studentCodes = [];
@@ -222,17 +237,25 @@ function postToDb(tableName) {
 function fail(parent, title) {
   $(parent).removeClass('has-success');
   $(parent).addClass('has-warning');
-  //$(parent).tooltip('destroy');
-  //$(parent).tooltip({'trigger': 'hover', 'title': title, 'placement': 'right'});
-  $(parent).append('<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>');
+  if (title) {
+    $(parent).tooltip('destroy');
+    $(parent).tooltip({'trigger': 'click', 'title': title, 'placement': 'right'});
+    if ($(parent).children().last().hasClass('form-control-feedback')) {
+      $(parent).children().last().remove();
+    }
+    $(parent).append('<span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>');
+  }
 
 }
 
 function success(parent) {
   $(parent).removeClass('has-warning');
   $(parent).addClass('has-success');
-  //$(parent).tooltip('destroy');
-  $(parent).append('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
+  $(parent).tooltip('destroy');
+  if ($(parent).children().last().hasClass('form-control-feedback')) {
+    $(parent).children().last().remove();
+  }
+  // $(parent).append('<span class="glyphicon glyphicon-ok form-control-feedback"></span>');
 }
 
 function updateSummaryTable(field) {
@@ -264,7 +287,7 @@ function updateSummaryTable(field) {
   $('#total').html(sum);
 
   if (bu_points === 10) {
-    $('#done').attr('checked','checked');
+    $('#done').attr('checked', 'checked');
   } else {
     $('#done').removeAttr('checked');
   }

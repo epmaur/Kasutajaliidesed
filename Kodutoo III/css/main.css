@@ -1,6 +1,10 @@
 body {
   text-align: center;
   padding: 50px;
+  min-width: 352px;
+}
+* {
+  transition: .5s all !important;
 }
 
 input {
@@ -39,6 +43,10 @@ input.input-small {
   position: fixed;
   top: 50px;
   left: 50px;
+  transition: none !important;
+}
+.form-group {
+  position: relative;
 }
 
 #summary-table {
@@ -47,11 +55,22 @@ input.input-small {
   /*border-radius: 3px;*/
 }
 
-
+table, tr, td {
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+}
 #summary-table td {
   padding: 5px;
 }
 
+#checkboxes-wrapper {
+  margin: 25px 0;
+}
+
+.has-success .form-control,
+.has-warning .form-control {
+  border-color: #c1c1c1;
+}
 .form-group.has-warning input.nr-input,
 .form-group.has-warning input[type="url"],
 .form-group.has-warning input.name-input,
@@ -63,6 +82,23 @@ input.input-small {
 .form-group.has-success input.name-input,
 .form-group.has-success input.code-input {
   border: 1px solid #168000;
+}
+#extra-points .form-group,
+#checkboxes-wrapper .form-group {
+  position: relative;
+  max-width: 300px;
+  margin: 0 auto;
+  border-bottom: 1px solid #378752;
+  padding: 5px 0;
+  text-align: left;
+}
+#extra-points .form-group .cbox-container,
+#checkboxes-wrapper .form-group .cbox-container {
+  vertical-align: top;
+}
+#extra-points .form-group div:last-child,
+#checkboxes-wrapper .form-group div:last-child {
+  width: calc(100% - 23px);
 }
 
 
@@ -127,4 +163,36 @@ input.input-small {
 
 .overdue {
   color:red;
+}
+
+#additional-points {
+  margin-top: 40px;
+}
+.tooltip {
+  transition: unset !important;
+}
+
+@media (max-width: 1140px) {
+  #due-date-wrapper {
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+}
+@media (max-width: 991px) {
+  body {
+    padding: 50px 37px;
+  }
+}
+@media (max-width: 768px) {
+  body {
+    padding: 50px 25px;
+  }
+  .sm-200 {
+    width: 200px !important;
+    text-align: left;
+  }
+  .sm-block {
+    display: block !important;
+  }
 }

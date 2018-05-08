@@ -3,12 +3,15 @@
   <head>
     <meta charset="UTF-8">
     <title>Kodutöö 3</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/jquery-ui.min.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<script src="js/bootstrap.min.js"></script>-->
     <script src="js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -24,7 +27,7 @@
 
       <div class="container">
         <div>
-          <div class="form-group inline-block">
+          <div class="inline-block">
             <div class="label">Nimi</div>
             <div class="form-group">
               <input v-if="this.work" type="text" class="form-control name-input" id="student1_name" placeholder="Tudeng #1"
@@ -38,7 +41,7 @@
             </div>
           </div>
 
-          <div class="form-group inline-block">
+          <div class="inline-block">
             <div class="label">Kood</div>
             <div class="form-group">
               <input v-if="this.work" type="text" class="form-control code-input" id="student1_code" placeholder="Tudeng #1" v-model="this.work.student1.student_code">
@@ -60,39 +63,39 @@
           <h1>Baasülesanne</h1>
 
           <div class="form-group">
-            <div class="inline-block"><div>Ootejärjekord</div></div>
+            <div class="inline-block sm-200"><div>Ootejärjekord</div></div>
             <input type="text" class="form-control input-small inline-block nr-input" id="bu1_p" placeholder="0">
-            <input type="text" class="form-control inline-block" id="bu1_c" placeholder="Kommentaar">
+            <input type="text" class="form-control inline-block sm-block" id="bu1_c" placeholder="Kommentaar">
           </div>
 
           <div class="form-group">
-            <div class="inline-block"><div>Sortimine</div></div>
+            <div class="inline-block sm-200"><div>Sortimine</div></div>
             <input type="text" class="form-control input-small inline-block nr-input" id="bu2_p" placeholder="0">
-            <input type="text" class="form-control inline-block" id="bu2_c" placeholder="Kommentaar">
+            <input type="text" class="form-control inline-block sm-block" id="bu2_c" placeholder="Kommentaar">
           </div>
 
           <div class="form-group">
-            <div class="inline-block"><div>Tähtajaline lisaülesanne</div></div>
+            <div class="inline-block sm-200"><div>Tähtajaline lisaülesanne</div></div>
             <input type="text" class="form-control input-small inline-block nr-input" id="bu3_p" placeholder="0">
-            <input type="text" class="form-control inline-block" id="bu3_c" placeholder="Kommentaar">
+            <input type="text" class="form-control inline-block sm-block" id="bu3_c" placeholder="Kommentaar">
           </div>
 
           <div class="form-group">
-            <div class="inline-block"><div>Elude kaotamine</div></div>
+            <div class="inline-block sm-200"><div>Elude kaotamine</div></div>
             <input type="text" class="form-control input-small inline-block nr-input" id="bu4_p" placeholder="0">
-            <input type="text" class="form-control inline-block" id="bu4_c" placeholder="Kommentaar">
+            <input type="text" class="form-control inline-block sm-block" id="bu4_c" placeholder="Kommentaar">
           </div>
 
           <div class="form-group">
-            <div class="inline-block"><div>Mängu läbikukkumine, punktid ja kordamine</div></div>
+            <div class="inline-block sm-200"><div>Mängu läbikukkumine, punktid ja kordamine</div></div>
             <input type="text" class="form-control input-small inline-block nr-input" id="bu5_p" placeholder="0">
-            <input type="text" class="form-control inline-block" id="bu5_c" placeholder="Kommentaar">
+            <input type="text" class="form-control inline-block sm-block" id="bu5_c" placeholder="Kommentaar">
           </div>
 
           <div class="form-group">
-            <div class="inline-block"><div>Kasutaja tähelepanu juhitakse animatsioonidega</div></div>
+            <div class="inline-block sm-200"><div>Kasutaja tähelepanu juhitakse animatsioonidega</div></div>
             <input type="text" class="form-control input-small inline-block nr-input" id="bu6_p" placeholder="0">
-            <input type="text" class="form-control inline-block" id="bu6_c" placeholder="Kommentaar">
+            <input type="text" class="form-control inline-block sm-block" id="bu6_c" placeholder="Kommentaar">
           </div>
         </div>
 
@@ -100,83 +103,83 @@
           <h1>Lisaülesanded</h1>
 
           <div class="form-group">
-            <div class="inline-block">Ilus kujundus</div>
             <label class="cbox-container">
               <input type="checkbox" class="form-control inline-block" id="lu1">
               <span class="checkmark"></span>
             </label>
+            <div class="inline-block">Ilus kujundus</div>
           </div>
 
           <div class="form-group">
-            <div class="inline-block">Mängu kujundus toetab teemat</div>
             <label class="cbox-container">
               <input type="checkbox" class="form-control inline-block" id="lu2">
               <span class="checkmark"></span>
             </label>
+            <div class="inline-block">Mängu kujundus toetab teemat</div>
           </div>
 
           <div class="form-group">
-            <div class="inline-block">Head ilmumised</div>
             <label class="cbox-container">
               <input type="checkbox" class="form-control inline-block" id="lu3">
               <span class="checkmark"></span>
             </label>
+            <div class="inline-block">Head ilmumised</div>
           </div>
 
           <div class="form-group">
-            <div class="inline-block">Hea sortimise tagasiside</div>
             <label class="cbox-container">
               <input type="checkbox" class="form-control inline-block" id="lu4">
               <span class="checkmark"></span>
             </label>
+            <div class="inline-block">Hea sortimise tagasiside</div>
           </div>
 
           <div class="form-group">
-            <div class="inline-block">Hea lisaülesande "episood"</div>
             <label class="cbox-container">
               <input type="checkbox" class="form-control inline-block" id="lu5">
               <span class="checkmark"></span>
             </label>
+            <div class="inline-block">Hea lisaülesande "episood"</div>
           </div>
 
           <div class="form-group">
-            <div class="inline-block">Hea läbikukkumiste tagasiside</div>
             <label class="cbox-container">
               <input type="checkbox" class="form-control inline-block" id="lu6">
               <span class="checkmark"></span>
             </label>
+            <div class="inline-block">Hea läbikukkumiste tagasiside</div>
           </div>
 
           <div class="form-group">
-            <div class="inline-block">Heliline tagasiside</div>
             <label class="cbox-container">
               <input type="checkbox" class="form-control inline-block" id="lu7">
               <span class="checkmark"></span>
             </label>
+            <div class="inline-block">Heliline tagasiside</div>
           </div>
 
           <div class="form-group">
-            <div class="inline-block">Mängu õpitavus on hea</div>
             <label class="cbox-container">
               <input type="checkbox" class="form-control inline-block" id="lu8">
               <span class="checkmark"></span>
             </label>
+            <div class="inline-block">Mängu õpitavus on hea</div>
           </div>
 
           <div class="form-group">
-            <div class="inline-block">Sorditavaid objekte saab lohistada (drag&drop)</div>
             <label class="cbox-container">
               <input type="checkbox" class="form-control inline-block" id="lu9">
               <span class="checkmark"></span>
             </label>
+            <div class="inline-block">Sorditavaid objekte saab lohistada (drag&drop)</div>
           </div>
 
           <div class="form-group">
-            <div class="inline-block">Töötab ka mobiilil</div>
             <label class="cbox-container">
               <input type="checkbox" class="form-control inline-block" id="lu10">
               <span class="checkmark"></span>
             </label>
+            <div class="inline-block">Töötab ka mobiilil</div>
           </div>
         </div>
 
@@ -184,15 +187,15 @@
           <h1>Täiendavad andmed</h1>
 
           <div class="form-group">
-            <div class="inline-block"><div>Lisapunktid</div></div>
+            <div class="inline-block sm-200"><div>Lisapunktid</div></div>
             <input type="text" class="form-control input-small inline-block nr-input" id="extra_p" placeholder="0">
-            <input type="text" class="form-control inline-block" id="extra_c" placeholder="Kommentaar">
+            <input type="text" class="form-control inline-block sm-block" id="extra_c" placeholder="Kommentaar">
           </div>
 
           <div class="form-group">
-            <div class="inline-block"><div>Hilinemine</div></div>
+            <div class="inline-block sm-200"><div>Hilinemine</div></div>
             <input type="text" class="form-control input-small inline-block nr-input" id="late_p" placeholder="0">
-            <input type="text" class="form-control inline-block" id="late_c" placeholder="Kommentaar">
+            <input type="text" class="form-control inline-block sm-block" id="late_c" placeholder="Kommentaar">
           </div>
 
           <div class="form-group">
@@ -201,7 +204,7 @@
               <input type="checkbox" class="form-control inline-block" id="plag_p">
               <span class="checkmark"></span>
             </label>
-            <input type="text" class="form-control inline-block" id="plag_c" placeholder="Lahendus">
+            <input type="text" class="form-control inline-block sm-block" id="plag_c" placeholder="Lahendus">
           </div>
         </div>
 
@@ -232,19 +235,19 @@
 
         <div id="checkboxes-wrapper">
           <div class="form-group">
-            <div class="inline-block">Arvestatud</div>
             <label class="cbox-container">
               <input type="checkbox" class="form-control inline-block" id="done">
               <span class="checkmark"></span>
             </label>
+            <div class="inline-block">Arvestatud</div>
           </div>
 
           <div class="form-group">
-            <div class="inline-block">Märkimisväärne töö</div>
             <label class="cbox-container">
               <input type="checkbox" class="form-control inline-block" id="cool">
               <span class="checkmark"></span>
             </label>
+            <div class="inline-block">Märkimisväärne töö</div>
           </div>
         </div>
 
