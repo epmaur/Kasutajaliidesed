@@ -21,11 +21,12 @@
   <div id="main-container">
     <div v-if="this.tab === 1" id="index">
       <div id="due-date-wrapper">
-        <h1 id="due-date">18.04.2018</h1>
+        <h1 id="due-date">09.05.2018</h1>
         <button class="btn btn-success" id="extend">Pikenda</button>
       </div>
 
       <div class="container">
+        <h1>Bürokraatia mäng</h1>
         <div>
           <div class="inline-block">
             <div class="label">Nimi</div>
@@ -60,7 +61,7 @@
         </div>
 
         <div id="base-points">
-          <h1>Baasülesanne</h1>
+          <h2>Baasülesanne</h2>
 
           <div class="form-group">
             <div class="inline-block sm-200"><div>Ootejärjekord</div></div>
@@ -100,7 +101,7 @@
         </div>
 
         <div id="extra-points">
-          <h1>Lisaülesanded</h1>
+          <h2>Lisaülesanded</h2>
 
           <div class="form-group">
             <label class="cbox-container">
@@ -184,7 +185,7 @@
         </div>
 
         <div id="additional-points">
-          <h1>Täiendavad andmed</h1>
+          <h2>Täiendavad andmed</h2>
 
           <div class="form-group">
             <div class="inline-block sm-200"><div>Lisapunktid</div></div>
@@ -207,7 +208,7 @@
             <input type="text" class="form-control inline-block sm-block" id="plag_c" placeholder="Lahendus">
           </div>
         </div>
-
+        <h2>Kokkuvõte</h2>
         <table id="summary-table">
           <tbody>
             <tr>
@@ -258,7 +259,8 @@
     </div>
 
     <div v-if="this.tab === 2" class="container" id="container">
-      <table class="table">
+      <h1>Bürokraatia mäng</h1>
+      <table class="table work">
         <thead>
         <tr>
           <th>Tudeng 1</th>
@@ -268,7 +270,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="work in works" v-bind:class="{ success : work.cool }">
+        <tr v-for="work in works" v-bind:class="{ success : (work.cool===1) }">
           <td>
             <span v-if="work.student1_id">{{ this.students.filter(x => x.id === work.student1_id)[0].name }}</span>
           </td>
