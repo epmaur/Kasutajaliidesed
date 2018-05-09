@@ -10,16 +10,6 @@ const bu_inputs =['#bu1_p','#bu2_p','#bu3_p', '#bu4_p', '#bu5_p', '#bu6_p'];
 
 
 $(document).ready(function() {
-  setup();
-  $(document).on('click', '.choose', function() {
-    setTimeout(function() {
-      setup();
-    }, 500);
-  });
-});
-
-function setup() {
-  // console.log('setup()');
   checkDueDate();
 
   $('#extend').click(function() {
@@ -74,6 +64,7 @@ function setup() {
     studentNames.push(value.name);
     studentCodes.push(value.student_code);
   });
+  console.log('studentNames:', studentNames);
 
   $('#student1_name').autocomplete({
     source: studentNames,
@@ -106,8 +97,9 @@ function setup() {
 
 
   $('#submit').click(function() {
+    console.log('s1 code:', $('#student1_code').val(), 's1 name:', $('#student1_name'), 'url:', $('#url').val());
     if ((($('#student1_code').val() && $('#student1_name').val()) ||
-            ($('#student2_code').val() && $('#student2_name'))) &&
+            ($('#student2_code').val() && $('#student2_name'). val())) &&
         $('#url').val()) {
       var student1 = null;
       var student2 = null;
@@ -238,7 +230,7 @@ function setup() {
       fail(parent, 'Pikkus peab olema vähemalt 1 tähemärk');
     }
   });
-}
+});
 
 function getFromDb(tableName) {
   $.ajax({
@@ -374,3 +366,9 @@ function formatDate(currentDate, delimiter) {
     return twoDigitDay + delimiter + twoDigitMonth + delimiter + currentDate.getFullYear();
   }
 }
+
+
+
+
+
+

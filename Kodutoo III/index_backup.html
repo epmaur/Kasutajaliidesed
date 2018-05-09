@@ -28,6 +28,7 @@
     <div class="container">
       <input type="checkbox" id="isNew" v-model="this.work" style="display:none;">
       <input v-if="this.work" type="text" id="workId" v-model="this.work.id" style="display:none;">
+      <input type="text" v-model="this.work.bu1_p">
       <h1>Bürokraatia mäng</h1>
       <div>
         <div class="inline-block">
@@ -287,8 +288,8 @@
         </div>
       </div>
 
-      <button class="btn btn-lg btn-warning" v-on:click="setWorkId2(2)">Tagasi</button>
-      <button class="btn btn-lg btn-success" v-on:click="setWorkId2(1)" id="submit">Salvesta</button>
+      <button class="btn btn-lg btn-warning" v-on:click="setWorkId2()">Tagasi</button>
+      <button class="btn btn-lg btn-success" id="submit">Salvesta</button>
 
     </div>
   </div>
@@ -322,7 +323,7 @@
         </td>
 
         <td>
-          <button class="btn btn-success choose" v-on:click="setWorkId(work.id)">Vaata</button>
+          <button class="btn btn-success" v-on:click="setWorkId(work.id)">Vaata</button>
         </td>
       </tr>
       </tbody>
@@ -400,8 +401,8 @@
         console.log('student2:', this.student2.name);
         this.tab = 1;
       },
-      setWorkId2(id) {
-        this.tab = id;
+      setWorkId2() {
+        this.tab = 2;
       },
       newWork() {
         this.work = null;
