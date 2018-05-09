@@ -185,6 +185,10 @@ table, tr, td {
   transition: unset !important;
 }
 
+.ui-widget.ui-widget-content {
+  transition: none !important;
+}
+
 @media (max-width: 1140px) {
   #due-date-wrapper {
     position: relative;

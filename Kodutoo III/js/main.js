@@ -1,8 +1,10 @@
 const STUDENTS_TABLE_NAME = 'ui_t3_142766_students';
 const WORK_TABLE_NAME = 'ui_t3_142766_work';
-var students = [{"id":"1","student_code":"112233IAPB","name":"Kaire Kaalikas","student_group":"K16"},{"id":"2","student_code":"070707IAPB","name":"Peeter Paun","student_group":"K12"},{"id":"3","student_code":"080808IAPB","name":"Robin Kuur","student_group":"K12"},{"id":"4","student_code":"142766IAPB","name":"Kert Ojasaar","student_group":"K16"},{"id":"5","student_code":"123123IAPB","name":"test","student_group":"K14"},{"id":"6","student_code":"111111IAPB","name":"test","student_group":"K12"},{"id":"7","student_code":"111111IAPB","name":"test123","student_group":"K12"},{"id":"8","student_code":"000000IAPB","name":"Testija Test","student_group":"K12"},{"id":"9","student_code":"000000IAPB","name":"Testija Test","student_group":"K12"}];
-// getFromDb(STUDENTS_TABLE_NAME);
-console.log('students:', students);
+var students = [];
+getFromDb(STUDENTS_TABLE_NAME);
+var works = [];
+getFromDb(WORK_TABLE_NAME);
+// console.log('students:', students);
 const lu_inputs = ['#lu1', '#lu2', '#lu3', '#lu4', '#lu5', '#lu6', '#lu7', '#lu8', '#lu9', '#lu10'];
 const bu_inputs =['#bu1_p','#bu2_p','#bu3_p', '#bu4_p', '#bu5_p', '#bu6_p'];
 
@@ -94,58 +96,68 @@ $(document).ready(function() {
 
 
   $('#submit').click(function() {
-    const student1 = students.filter(x => x.student_code === $('#student1_code').val())[0];
-    const student2 = students.filter(x => x.student_code === $('#student2_code').val())[0];
-    console.log('bu1_c:', $('#bu1_c').val(), typeof $('#bu1_c').val());
-    const data = {
-      'tableName': WORK_TABLE_NAME,
-      'due_date': '02.05.2018',
-      'student1_id': student1.id,
-      'student2_id': student2.id,
-      'url': $('#url').val(),
-      'bu1_p': $('#bu1_p').val(),
-      'bu1_c': $('#bu1_c').val(),
-      'bu2_p': $('#bu2_p').val(),
-      'bu2_c': $('#bu2_c').val(),
-      'bu3_p': $('#bu3_p').val(),
-      'bu3_c': $('#bu3_c').val(),
-      'bu4_p': $('#bu4_p').val(),
-      'bu4_c': $('#bu4_c').val(),
-      'bu5_p': $('#bu5_p').val(),
-      'bu5_c': $('#bu5_c').val(),
-      'bu6_p': $('#bu6_p').val(),
-      'bu6_c': $('#bu6_c').val(),
-      'lu1': $('#lu1').is(':checked'),
-      'lu2': $('#lu2').is(':checked'),
-      'lu3': $('#lu3').is(':checked'),
-      'lu4': $('#lu4').is(':checked'),
-      'lu5': $('#lu5').is(':checked'),
-      'lu6': $('#lu6').is(':checked'),
-      'lu7': $('#lu7').is(':checked'),
-      'lu8': $('#lu8').is(':checked'),
-      'lu9': $('#lu9').is(':checked'),
-      'lu10': $('#lu10').is(':checked'),
-      'extra_p': $('#extra_p').val(),
-      'extra_c': $('#extra_c').val(),
-      'late_p': $('#late_p').val(),
-      'late_c': $('#late_c').val(),
-      'plag_p': $('#plag_p').is(':checked'),
-      'plag_c': $('#plag_c').val(),
-      'done': $('#done').is(':checked'),
-      'cool': $('#cool').is(':checked')
-    };
-    $.ajax({
-      url: 'post.php',
-      type: 'POST',
-      data: data,
-      dataType: 'json',
-      success: function(data) {
-        console.log('success data:', data)
+    if ((($('#student1_code').val() && $('#student1_name').val()) ||
+            ($('#student2_code').val() && $('#student2_name'))) &&
+        $('#url').val()) {
+      var student1 = null;
+      var student2 = null;
+      if ($('#student1_code').val()) {
+        student1 = students.filter(x => x.student_code === $('#student1_code').val())[0];
       }
-    });
-    setTimeout(function () {
-      getFromDb(WORK_TABLE_NAME);
-    }, 3000);
+      if ($('#student2_code').val()) {
+        student2 = students.filter(x => x.student_code === $('#student2_code').val())[0];
+      }
+      // console.log('bu1_c:', $('#bu1_c').val(), typeof $('#bu1_c').val());
+      const data = {
+        'tableName': WORK_TABLE_NAME,
+        'due_date': $('#due-date').html(),
+        'student1_id': student1 ? student1.id : null,
+        'student2_id': student2 ? student2.id : null,
+        'url': $('#url').val(),
+        'bu1_p': $('#bu1_p').val() || 0,
+        'bu1_c': $('#bu1_c').val() || null,
+        'bu2_p': $('#bu2_p').val() || 0,
+        'bu2_c': $('#bu2_c').val() || null,
+        'bu3_p': $('#bu3_p').val() || 0,
+        'bu3_c': $('#bu3_c').val() || null,
+        'bu4_p': $('#bu4_p').val() || 0,
+        'bu4_c': $('#bu4_c').val() || null,
+        'bu5_p': $('#bu5_p').val() || 0,
+        'bu5_c': $('#bu5_c').val() || null,
+        'bu6_p': $('#bu6_p').val() || 0,
+        'bu6_c': $('#bu6_c').val() || null,
+        'lu1': $('#lu1').is(':checked'),
+        'lu2': $('#lu2').is(':checked'),
+        'lu3': $('#lu3').is(':checked'),
+        'lu4': $('#lu4').is(':checked'),
+        'lu5': $('#lu5').is(':checked'),
+        'lu6': $('#lu6').is(':checked'),
+        'lu7': $('#lu7').is(':checked'),
+        'lu8': $('#lu8').is(':checked'),
+        'lu9': $('#lu9').is(':checked'),
+        'lu10': $('#lu10').is(':checked'),
+        'extra_p': $('#extra_p').val() || 0,
+        'extra_c': $('#extra_c').val() || null,
+        'late_p': $('#late_p').val() || 0,
+        'late_c': $('#late_c').val() || null,
+        'plag_p': $('#plag_p').is(':checked'),
+        'plag_c': $('#plag_c').val() || null,
+        'done': $('#done').is(':checked'),
+        'cool': $('#cool').is(':checked')
+      };
+      $.ajax({
+        url: 'post.php',
+        type: 'POST',
+        data: data,
+        dataType: 'json',
+        success: function (data) {
+          console.log('success data:', data)
+          getFromDb(WORK_TABLE_NAME);
+        }
+      });
+    } else {
+      $('#myModal').modal();
+    }
   });
 
   $('.nr-input').keydown(function (e) {
@@ -160,7 +172,8 @@ $(document).ready(function() {
   });
   $(document).on('keyup', '.nr-input', function() {
     const parent = $(this).parent();
-    if (parseInt($(this).val())) {
+    console.log('.nr-input val:', $(this).val(), 'type:', typeof $(this).val());
+    if (parseInt($(this).val()) || $(this).val() === '0') {
       success(parent);
     } else {
       fail(parent);
@@ -212,6 +225,8 @@ function getFromDb(tableName) {
       console.log('success data:', data);
       if (tableName === STUDENTS_TABLE_NAME) {
         students = data;
+      } else if (tableName === WORK_TABLE_NAME) {
+        works = data;
       }
     }
   });
@@ -298,18 +313,20 @@ function updateSummaryTable(field) {
 }
 
 function checkDueDate() {
-  var dueDate = $('#due-date').html().split('.');
-  var formattedDueDate = dueDate[2] + "/" + dueDate[1] + "/" + dueDate[0];
+  if ($('#due-date').html()) {
+    var dueDate = $('#due-date').html().split('.');
+    var formattedDueDate = dueDate[2] + "/" + dueDate[1] + "/" + dueDate[0];
 
-  var d1 = Date.parse(formattedDueDate);
-  var d2 = Date.parse(formatDate(new Date, '/'));
+    var d1 = Date.parse(formattedDueDate);
+    var d2 = Date.parse(formatDate(new Date, '/'));
 
-  if (d2 > d1) {
-    $('#late_p').val(-5);
-    $('#due-date').addClass('overdue');
+    if (d2 > d1) {
+      $('#late_p').val(-5);
+      $('#due-date').addClass('overdue');
 
-  } else {
-    $('#due-date').removeClass('overdue');
+    } else {
+      $('#due-date').removeClass('overdue');
+    }
   }
 }
 

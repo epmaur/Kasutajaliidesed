@@ -272,10 +272,10 @@
         <tbody>
         <tr v-for="work in works" v-bind:class="{ success : (work.cool===1) }">
           <td>
-            <span v-if="work.student1_id">{{ this.students.filter(x => x.id === work.student1_id)[0].name }}</span>
+            <span v-if="work.student1_id && work.student1_id != 0">{{ this.students.filter(x => x.id === work.student1_id)[0].name }}</span>
           </td>
           <td>
-            <span v-if="work.student2_id">{{ this.students.filter(x => x.id === work.student2_id)[0].name }}</span>
+            <span v-if="work.student2_id && work.student2_id != 0">{{ this.students.filter(x => x.id === work.student2_id)[0].name }}</span>
           </td>
           <td>
             <a :href="work.url">{{ work.url }}</a>
@@ -290,11 +290,30 @@
     </div>
   </div>
 
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Viga</h4>
+        </div>
+        <div class="modal-body">
+          <p>Vähemalt ühe tudengi andmed ja URL väli peavad olema täidetud!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Sulge</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
     <script>
       var vm = new Vue({
         el: "#main-container",
         data: {
-          tab: 1,
+          tab: 2,
           work: null,
           student1: {'name': '', 'student_code': ''},
           student2: {'name': '', 'student_code': ''},
@@ -304,23 +323,63 @@
 
         methods: {
           setWorkId(workId) {
+            // console.log('workId:', workId);
             this.tab = 1;
-            this.work = this.works.filter(x => x.id === workId)[0];
-            var a = this.students.filter(x => x.id === this.work.student1_id)[0];
-            this.student1 = {'name': a.name, 'student_code': a.student_code};
-            var b = this.students.filter(x => x.id === this.work.student1_id)[0];
-            this.student2 = {'name': b.name, 'student_code': b.student_code};
+            this.works.forEach(function(work) {
+              // console.log('work id:', work.id, 'typeof:', typeof work.id);
+              // console.log('workIDs equal:', workId === work.id);
+              // console.log('');
+              if (workId === work.id) {
+                this.work = work;
+                return;
+              }
+            });
+            // this.work = this.works.filter(x => x.id === workId)[0];
+            console.log('workId:', workId, 'work:', work);
+            var a = null;
+            var b = null;
+            this.students.forEach(function(student) {
+              if (student.id === this.work.student1_id) {
+                a = student;
+              }
+              if (student.id === this.work.student2_id) {
+                b = student;
+              }
+            });
+            if (a) {
+              this.student1 = {'name': a.name, 'student_code': a.student_code};
+            } else {
+              this.student1 = {'name': '', 'student_code': 0};
+            }
+            if (b) {
+              this.student2 = {'name': b.name, 'student_code': b.student_code};
+            } else {
+              this.student2 = {'name': '', 'student_code': 0};
+            }
+            console.log('student1:', this.student1);
+            console.log('student2:', this.student2);
           }
         },
 
         mounted() {
           axios.get('get.php?tableName=ui_t3_142766_work').then(response => {
-            // console.log(response.data);
-            this.works = [{"id":"1","due_date":"02.05.2018","student1_id":"4","student2_id":"1","url":"test.ee","bu1_p":"1","bu1_c":"a","bu2_p":"1","bu2_c":"","bu3_p":"0","bu3_c":"","bu4_p":"0","bu4_c":"","bu5_p":"0","bu5_c":"","bu6_p":"0","bu6_c":"","lu1":"0","lu2":"0","lu3":"0","lu4":"0","lu5":"0","lu6":"0","lu7":"0","lu8":"0","lu9":"0","lu10":"0","extra_p":"1","extra_c":"a","late_p":"0","late_c":"","plag_p":"0","plag_c":"","done":"0","cool":"1"}]
+            console.log('works:', response.data);
+            // this.works = [{"id":"1","due_date":"02.05.2018","student1_id":"4","student2_id":"1","url":"test.ee","bu1_p":"1","bu1_c":"a","bu2_p":"1","bu2_c":"","bu3_p":"0","bu3_c":"","bu4_p":"0","bu4_c":"","bu5_p":"0","bu5_c":"","bu6_p":"0","bu6_c":"","lu1":"0","lu2":"0","lu3":"0","lu4":"0","lu5":"0","lu6":"0","lu7":"0","lu8":"0","lu9":"0","lu10":"0","extra_p":"1","extra_c":"a","late_p":"0","late_c":"","plag_p":"0","plag_c":"","done":"0","cool":"1"}]
+            this.works = response.data;
           });
-          axios.get('get.php?tableName=ui_t3_142766_students').then(res => {
-            this.students = [{"id":"1","student_code":"112233IAPB","name":"Kaire Kaalikas","student_group":"K16"},{"id":"2","student_code":"070707IAPB","name":"Peeter Paun","student_group":"K12"},{"id":"3","student_code":"080808IAPB","name":"Robin Kuur","student_group":"K12"},{"id":"4","student_code":"142766IAPB","name":"Kert Ojasaar","student_group":"K16"},{"id":"5","student_code":"123123IAPB","name":"test","student_group":"K14"},{"id":"6","student_code":"111111IAPB","name":"test","student_group":"K12"},{"id":"7","student_code":"111111IAPB","name":"test123","student_group":"K12"},{"id":"8","student_code":"000000IAPB","name":"Testija Test","student_group":"K12"},{"id":"9","student_code":"000000IAPB","name":"Testija Test","student_group":"K12"},{"id":"10","student_code":"","name":"","student_group":""}];
-          });
+          /*axios.get('get.php?tableName=ui_t3_142766_students').then(res => {
+            // this.students = [{"id":"1","student_code":"112233IAPB","name":"Kaire Kaalikas","student_group":"K16"},{"id":"2","student_code":"070707IAPB","name":"Peeter Paun","student_group":"K12"},{"id":"3","student_code":"080808IAPB","name":"Robin Kuur","student_group":"K12"},{"id":"4","student_code":"142766IAPB","name":"Kert Ojasaar","student_group":"K16"},{"id":"5","student_code":"123123IAPB","name":"test","student_group":"K14"},{"id":"6","student_code":"111111IAPB","name":"test","student_group":"K12"},{"id":"7","student_code":"111111IAPB","name":"test123","student_group":"K12"},{"id":"8","student_code":"000000IAPB","name":"Testija Test","student_group":"K12"},{"id":"9","student_code":"000000IAPB","name":"Testija Test","student_group":"K12"},{"id":"10","student_code":"","name":"","student_group":""}];
+            console.log('students:', res.data);
+            res.subscribe(
+                s => this.students = s.data,
+                e => console.log('error:', e)
+            );
+          // this.students = res.data;
+          });*/
+          axios.get('get.php?tableName=ui_t3_142766_students').then(
+              s => this.students = s.data,
+              e => console.log('error:', e)
+          );
         }
       });
     </script>
